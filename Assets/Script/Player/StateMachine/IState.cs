@@ -10,12 +10,22 @@ public interface IState
     }
 
     public void Update()
-    {// 현재 상태일 동안 실행
+    {// 업데이트에서 실행할 내용
 
     }
 
     public void Exit()
     {// 상태를 벗어날때 실행
+
+    }
+
+    public void HandleInput()
+    {// 상태 머신 동작 중에 입력값 있을 시
+
+    }
+
+    public void PhysicsUpdate()
+    {// 물리적 업데이트
 
     }
 }

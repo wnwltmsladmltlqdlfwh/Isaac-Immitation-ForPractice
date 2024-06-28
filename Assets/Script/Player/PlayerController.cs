@@ -1,26 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    StateMachine stateMachine;
+    [field : Header("Animations")]
+    [field : SerializeField] public PlayerAnimation AnimationData { get; private set; }
 
-    public PlayerInput input { get; private set; }
-    public CharacterController characterController { get; private set; }
+    [field : Header("References")]
+    [field : SerializeField] public PlayerSO Data { get; private set; }
+
+    public Rigidbody Rigidbody { get; private set; }
+
+    public Animator HeadAnimator;
+    public Animator BodyAnimator;
+    public CharacterController Controller { get; private set; }
+
+
+    private PlayerStateMachine stateMachine;
 
     private void Awake()
     {
-        input = GetComponent<PlayerInput>();
-        characterController = GetComponent<CharacterController>();
-
-        stateMachine = new StateMachine(this);
+        stateMachine = new PlayerStateMachine(this);
+        AnimationData.Initialize();
     }
 
     void Start()
     {
-        stateMachine.Initialize(stateMachine.idlestate);
+        stateMachine.ChangedState(stateMachine.idleBodyState);
     }
 
     void Update()
@@ -28,8 +36,16 @@ public class PlayerController : MonoBehaviour
         stateMachine.Update();
     }
 
-    public void Move(Vector2 moveVec)
+    private void FixedUpdate()
     {
-        
+
+    }
+
+    public void MoveCharactor(Vector2 moveVector)
+    {
+        transform.Translate(moveVector * Data.playerMovementData.moveSpeed * Time.deltaTime);
+
+        BodyAnimator.SetFloat(AnimationData.inputXParameterHash, moveVector.x);
+        BodyAnimator.SetFloat(AnimationData.inputYParameterHash, moveVector.y);
     }
 }

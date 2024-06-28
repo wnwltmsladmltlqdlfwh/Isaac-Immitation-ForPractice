@@ -32,7 +32,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""391442b8-e7f8-4f5e-ba31-daea421f1782"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }

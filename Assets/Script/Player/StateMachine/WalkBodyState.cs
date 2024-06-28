@@ -1,29 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class WalkBodyState : IState
+public class WalkBodyState : PlayerBaseState
 {
-    public PlayerController player;
-
-
-    public WalkBodyState(PlayerController player)
+    public WalkBodyState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        this.player = player;
     }
 
-    public void Enter()
+    public override void Enter()
     {// 상태 진입 시 실행
         Debug.Log("걷기 상태 진입");
+        base.Enter();
     }
 
-    public void Update()
+    public override void Update()
     {// 현재 상태일 동안 실행
+        base.Update();
 
+        var moveDir = InputManager.Instance.moveDir;
+
+        stateMachine.Player.MoveCharactor(moveDir);
+
+        if(moveDir == Vector2.zero)
+        {
+            stateMachine.ChangedState(stateMachine.idleBodyState);
+        }
     }
 
-    public void Exit()
+    public override void Exit()
     {// 상태를 벗어날때 실행
         Debug.Log("걷기 상태 벗어남");
+        base.Exit();
     }
 }
