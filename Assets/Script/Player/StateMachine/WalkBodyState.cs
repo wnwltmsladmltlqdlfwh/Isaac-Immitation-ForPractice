@@ -22,6 +22,7 @@ public class WalkBodyState : PlayerBaseState
         var moveDir = InputManager.Instance.moveDir;
 
         stateMachine.Player.MoveCharactor(moveDir);
+        stateMachine.Player.HeadDirection(InputManager.Instance.IsShooting);
 
         if(moveDir == Vector2.zero)
         {

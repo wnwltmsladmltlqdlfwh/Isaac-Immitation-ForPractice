@@ -35,6 +35,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""BulletDir"",
+                    ""type"": ""Value"",
+                    ""id"": ""81c15a3a-9d4a-49f8-8356-d2244fe880a9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""NormalizeVector2"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,61 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""MoveChar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Arrow"",
+                    ""id"": ""101b11ed-49e3-4916-97b1-5d5a952d5e43"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletDir"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8c329a52-08a6-4621-aac9-f3e9572c4790"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""bdff547a-a9ee-4b71-aecb-f1cd66bcf901"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""da1495be-9da9-4908-b53f-5fea7d2c922c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a6d659a4-a0fd-4b2b-922b-289b55d173e1"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletDir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -118,6 +182,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         // CharactorActionsMap
         m_CharactorActionsMap = asset.FindActionMap("CharactorActionsMap", throwIfNotFound: true);
         m_CharactorActionsMap_MoveChar = m_CharactorActionsMap.FindAction("MoveChar", throwIfNotFound: true);
+        m_CharactorActionsMap_BulletDir = m_CharactorActionsMap.FindAction("BulletDir", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,11 +245,13 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CharactorActionsMap;
     private List<ICharactorActionsMapActions> m_CharactorActionsMapActionsCallbackInterfaces = new List<ICharactorActionsMapActions>();
     private readonly InputAction m_CharactorActionsMap_MoveChar;
+    private readonly InputAction m_CharactorActionsMap_BulletDir;
     public struct CharactorActionsMapActions
     {
         private @PlayerInputSystem m_Wrapper;
         public CharactorActionsMapActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveChar => m_Wrapper.m_CharactorActionsMap_MoveChar;
+        public InputAction @BulletDir => m_Wrapper.m_CharactorActionsMap_BulletDir;
         public InputActionMap Get() { return m_Wrapper.m_CharactorActionsMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -197,6 +264,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @MoveChar.started += instance.OnMoveChar;
             @MoveChar.performed += instance.OnMoveChar;
             @MoveChar.canceled += instance.OnMoveChar;
+            @BulletDir.started += instance.OnBulletDir;
+            @BulletDir.performed += instance.OnBulletDir;
+            @BulletDir.canceled += instance.OnBulletDir;
         }
 
         private void UnregisterCallbacks(ICharactorActionsMapActions instance)
@@ -204,6 +274,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @MoveChar.started -= instance.OnMoveChar;
             @MoveChar.performed -= instance.OnMoveChar;
             @MoveChar.canceled -= instance.OnMoveChar;
+            @BulletDir.started -= instance.OnBulletDir;
+            @BulletDir.performed -= instance.OnBulletDir;
+            @BulletDir.canceled -= instance.OnBulletDir;
         }
 
         public void RemoveCallbacks(ICharactorActionsMapActions instance)
@@ -233,5 +306,6 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     public interface ICharactorActionsMapActions
     {
         void OnMoveChar(InputAction.CallbackContext context);
+        void OnBulletDir(InputAction.CallbackContext context);
     }
 }

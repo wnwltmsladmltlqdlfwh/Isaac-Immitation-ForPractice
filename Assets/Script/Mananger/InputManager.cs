@@ -11,6 +11,14 @@ public class InputManager : Singleton<InputManager>
     public PlayerInputSystem.CharactorActionsMapActions charInput { get; private set; }
 
     public Vector2 moveDir;
+    public Vector2 bulletDir;
+
+    private bool isShooting = false;
+    public bool IsShooting
+    {
+        get { return isShooting; }
+        private set { isShooting = value; }
+    }
 
     private void Awake()
     {
@@ -21,6 +29,10 @@ public class InputManager : Singleton<InputManager>
         charInput.MoveChar.started += OnMoveChar;
         charInput.MoveChar.performed += OnMoveChar;
         charInput.MoveChar.canceled += OnMoveChar;
+
+        charInput.BulletDir.started += OnBulletDir;
+        charInput.BulletDir.performed += OnBulletDir;
+        charInput.BulletDir.canceled += OnBulletDir;
     }
 
     private void OnEnable()
@@ -36,5 +48,12 @@ public class InputManager : Singleton<InputManager>
     public void OnMoveChar(InputAction.CallbackContext callbackContext)
     {
         moveDir = callbackContext.ReadValue<Vector2>();
+    }
+
+    public void OnBulletDir(InputAction.CallbackContext callbackContext)
+    {
+        isShooting = charInput.BulletDir.IsPressed();
+
+        bulletDir = callbackContext.ReadValue<Vector2>();
     }
 }

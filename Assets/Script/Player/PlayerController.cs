@@ -11,11 +11,10 @@ public class PlayerController : MonoBehaviour
     [field : Header("References")]
     [field : SerializeField] public PlayerSO Data { get; private set; }
 
-    public Rigidbody Rigidbody { get; private set; }
+    public Rigidbody2D rb2D { get; private set; }
 
     public Animator HeadAnimator;
     public Animator BodyAnimator;
-    public CharacterController Controller { get; private set; }
 
 
     private PlayerStateMachine stateMachine;
@@ -23,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         stateMachine = new PlayerStateMachine(this);
+        rb2D = GetComponent<Rigidbody2D>();
+
+
         AnimationData.Initialize();
     }
 
@@ -41,11 +43,42 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void MoveCharactor(Vector2 moveVector)
+    public void MoveCharactor(Vector2 moveDir)
     {
-        transform.Translate(moveVector * Data.playerMovementData.moveSpeed * Time.deltaTime);
+        var movementData = Data.playerMovementData;
 
-        BodyAnimator.SetFloat(AnimationData.inputXParameterHash, moveVector.x);
-        BodyAnimator.SetFloat(AnimationData.inputYParameterHash, moveVector.y);
+        rb2D.AddForce(moveDir * movementData.moveSpeed);
+
+        BodyAnimator.SetFloat(AnimationData.inputXParameterHash, moveDir.x);
+        BodyAnimator.SetFloat(AnimationData.inputYParameterHash, moveDir.y);
+    }
+
+    public void StopMovement()
+    {
+        var movementData = Data.playerMovementData;
+
+        // 현재 속도
+        Vector2 curVelocity = rb2D.velocity;
+
+        Vector2 newVelocity = Vector2.Lerp(curVelocity, Vector2.zero, movementData.deceleration * Time.deltaTime);
+
+        rb2D.velocity = newVelocity;
+    }
+
+    public void HeadDirection(bool isShooting)
+    {
+        HeadAnimator.SetBool(AnimationData.inputShootHash, isShooting);
+
+        if (isShooting)
+        {
+            HeadAnimator.speed = Data.playerAttackData.attackSpeed;
+            HeadAnimator.SetFloat(AnimationData.inputXBulletHash, InputManager.Instance.bulletDir.x);
+            HeadAnimator.SetFloat(AnimationData.inputYBulletHash, InputManager.Instance.bulletDir.y);
+        }
+        else
+        {
+            HeadAnimator.SetFloat(AnimationData.inputXHeadHash, InputManager.Instance.moveDir.x);
+            HeadAnimator.SetFloat(AnimationData.inputYHeadHash, InputManager.Instance.moveDir.y);
+        }
     }
 }

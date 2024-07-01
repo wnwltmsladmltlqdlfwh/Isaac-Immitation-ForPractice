@@ -19,7 +19,11 @@ public class IdleBodyState : PlayerBaseState
     public override void Update()
     {// 현재 상태일 동안 실행
         base.Update();
-        if(InputManager.Instance.moveDir != Vector2.zero)
+
+        stateMachine.Player.StopMovement();
+        stateMachine.Player.HeadDirection(InputManager.Instance.IsShooting);
+
+        if (InputManager.Instance.moveDir != Vector2.zero)
         {
             stateMachine.ChangedState(stateMachine.walkBodyState);
         }

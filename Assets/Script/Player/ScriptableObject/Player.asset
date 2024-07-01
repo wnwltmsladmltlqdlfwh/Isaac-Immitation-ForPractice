@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerMovementData>k__BackingField:
     <moveSpeed>k__BackingField: 5
+    <acceleration>k__BackingField: 10
+    <deceleration>k__BackingField: 5
+  <playerAttackData>k__BackingField:
+    <attackSpeed>k__BackingField: 1
