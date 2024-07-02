@@ -10,6 +10,8 @@ public class PoolingManager : Singleton<PoolingManager>
     public int maxPoolSize = 15;
     public GameObject defalutBullet;
 
+    public Dictionary<string, GameObject> bulletDic = new Dictionary<string, GameObject>();
+
     public IObjectPool<GameObject> Pool { get; private set; }
 
     private void Awake()
@@ -36,6 +38,7 @@ public class PoolingManager : Singleton<PoolingManager>
         poolGo.GetComponent<DefaultBullet>().Pool = this.Pool;
         return poolGo;
     }
+
     private void OnTakeFromPool(GameObject poolGo)
     {
         poolGo.SetActive(true);

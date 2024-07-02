@@ -21,10 +21,8 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -687225642, guid: 2966051590fe1ff4babef38eebc6a3f3, type: 3}
-    - time: 0.16666667
       value: {fileID: -907032893, guid: 2966051590fe1ff4babef38eebc6a3f3, type: 3}
-    - time: 0.33333334
+    - time: 0.5
       value: {fileID: -687225642, guid: 2966051590fe1ff4babef38eebc6a3f3, type: 3}
     attribute: m_Sprite
     path: 
@@ -48,7 +46,6 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -687225642, guid: 2966051590fe1ff4babef38eebc6a3f3, type: 3}
     - {fileID: -907032893, guid: 2966051590fe1ff4babef38eebc6a3f3, type: 3}
     - {fileID: -687225642, guid: 2966051590fe1ff4babef38eebc6a3f3, type: 3}
   m_AnimationClipSettings:
@@ -56,7 +53,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.51666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -75,11 +72,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.16666667
-    functionName: OnShootPoint
-    data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 7aeebec69394ab540ae5a478cc807509, type: 3}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
+  m_Events: []

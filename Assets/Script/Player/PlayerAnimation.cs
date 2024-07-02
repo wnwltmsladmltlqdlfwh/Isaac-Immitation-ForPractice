@@ -15,9 +15,7 @@ public class PlayerAnimation
     [SerializeField] private string inputYMovementName = "InputY";
     [SerializeField] private string inputXHeadName = "HeadX";
     [SerializeField] private string inputYHeadName = "HeadY";
-    [SerializeField] private string inputXBulletName = "BulletX";
-    [SerializeField] private string inputYBulletName = "BulletY";
-    [SerializeField] private string inputShootName = "isShoot";
+    [SerializeField] private string inputShootName = "ShootTrigger";
 
     public int idleParameterHash { get; private set; }
     public int walkParameterHash { get; private set; }
@@ -25,8 +23,6 @@ public class PlayerAnimation
     public int inputYParameterHash { get; private set; }
     public int inputXHeadHash { get; private set; }
     public int inputYHeadHash { get; private set; }
-    public int inputXBulletHash { get; private set; }
-    public int inputYBulletHash { get; private set; }
     public int inputShootHash { get; private set; }
 
     public void Initialize()
@@ -39,9 +35,6 @@ public class PlayerAnimation
 
         inputXHeadHash = Animator.StringToHash(inputXHeadName);
         inputYHeadHash = Animator.StringToHash(inputYHeadName);
-
-        inputXBulletHash = Animator.StringToHash(inputXBulletName);
-        inputYBulletHash = Animator.StringToHash(inputYBulletName);
 
         inputShootHash = Animator.StringToHash(inputShootName);
     }

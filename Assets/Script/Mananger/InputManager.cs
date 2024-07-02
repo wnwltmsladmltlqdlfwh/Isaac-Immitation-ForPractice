@@ -54,6 +54,12 @@ public class InputManager : Singleton<InputManager>
     {
         isShooting = charInput.BulletDir.IsPressed();
 
-        bulletDir = callbackContext.ReadValue<Vector2>();
+        var inputDir = callbackContext.ReadValue<Vector2>();
+        if (inputDir == Vector2.zero)
+        {
+            return;
+        }
+
+        bulletDir = inputDir;
     }
 }

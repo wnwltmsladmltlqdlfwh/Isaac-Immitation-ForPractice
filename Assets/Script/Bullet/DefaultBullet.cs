@@ -11,23 +11,32 @@ public class DefaultBullet : MonoBehaviour
 
     public Vector2 startPos;
     public Vector2 shootdir;
+    private float passedTime = 0f;
 
-    private void OnEnable()
+    private void Awake()
     {
-        startPos = this.transform.position;
-        shootdir = InputManager.Instance.bulletDir;
         _body2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        passedTime += Time.deltaTime;
+
         float distance = Vector2.Distance(this.transform.localPosition, startPos);
-        if(distance > Data.bulletData.bulletRange)
+        if(distance > PlayerManager.Instance.AttackRange) //Data.bulletData.bulletRange
         {
             Pool.Release(this.gameObject);
         }
 
-        this.transform.Translate(shootdir * Data.bulletData.bulletSpeed * Time.deltaTime);
-        //_body2D.velocity += shootdir * Data.bulletData.bulletSpeed * Time.deltaTime;
+        this.transform.Translate(shootdir * PlayerManager.Instance.BulletSpeed * Time.deltaTime);
+
+        //_body2D.velocity += shootdir * PlayerManager.Instance.BulletSpeed * Time.deltaTime;
+    }
+
+    public void Init(Vector2 inputShootDir, Vector3 pos)
+    {
+        this.transform.position = pos;
+        startPos = pos;
+        shootdir = inputShootDir;
     }
 }

@@ -40,8 +40,8 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""name"": ""BulletDir"",
                     ""type"": ""Value"",
                     ""id"": ""81c15a3a-9d4a-49f8-8356-d2244fe880a9"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }
