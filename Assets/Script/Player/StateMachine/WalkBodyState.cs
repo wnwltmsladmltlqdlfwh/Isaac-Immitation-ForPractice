@@ -11,7 +11,6 @@ public class WalkBodyState : PlayerBaseState
 
     public override void Enter()
     {// 상태 진입 시 실행
-        Debug.Log("걷기 상태 진입");
         base.Enter();
     }
 
@@ -32,7 +31,6 @@ public class WalkBodyState : PlayerBaseState
 
     public override void Exit()
     {// 상태를 벗어날때 실행
-        Debug.Log("걷기 상태 벗어남");
         base.Exit();
     }
 }

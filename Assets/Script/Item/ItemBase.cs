@@ -6,7 +6,19 @@ public class ItemBase : MonoBehaviour
 {
     [field: Header("References")] 
     [field : SerializeField] public ItemSO ItemData;
-    
+
+    SpriteRenderer itemIcon;
+
+    private void Awake()
+    {
+        itemIcon = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        itemIcon.sprite = ItemData.ItemIconSprite;
+    }
+
     // æ∆¿Ã≈€ »πµÊ ∏ﬁºº¡ˆ
     public string AcquisitionMessage;
 

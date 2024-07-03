@@ -21,5 +21,5 @@ public class ItemSO : ScriptableObject
     [field: SerializeField][field: Range(0, 99)] public int MoneyItem;
     [field: SerializeField][field: Range(0, 99)] public int KeyItem;
 
-    [field: SerializeField] public Sprite itemSprite;
+    [field: SerializeField] public Sprite ItemIconSprite;
 }

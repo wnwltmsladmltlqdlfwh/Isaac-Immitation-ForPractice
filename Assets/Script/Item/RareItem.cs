@@ -13,14 +13,11 @@ public class RareItem : ItemBase
     protected override void ItemGain()
     {
         base.ItemGain();
-
+        Debug.Log("아이템 효과 발동");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ItemGet()
     {
-        if (collision.CompareTag("Player"))
-        {
-            Destroy(this.gameObject);
-        }
+        ItemGain();
     }
 }

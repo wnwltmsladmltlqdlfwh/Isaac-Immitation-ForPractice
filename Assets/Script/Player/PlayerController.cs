@@ -78,11 +78,14 @@ public class PlayerController : MonoBehaviour
 
         if (isShooting)
         {
+            float savedSpeed = HeadAnimator.speed;
+
             if(passedTime > PlayerManager.Instance.AttackSpeed)
             {
                 passedTime = 0f;
 
                 HeadAnimator.SetTrigger(AnimationData.inputShootHash);
+
                 // 발사
                 OnShootPoint();
             }
@@ -105,8 +108,10 @@ public class PlayerController : MonoBehaviour
             .Init(InputManager.Instance.bulletDir, headObj.transform.position);
     }
 
-    public IEnumerator GetItemMotions(Sprite _sprite)
+    private IEnumerator GetItemMotions(Sprite _sprite)
     {
+        Debug.Log("아이템 획득 애니메이션 실행");
+
         headObj.SetActive(false);
         bodyObj.SetActive(false);
         GetItemObj.SetActive(true);
@@ -118,14 +123,30 @@ public class PlayerController : MonoBehaviour
         bodyObj.SetActive(true);
         GetItemObj.SetActive(false);
         itemShowPos.sprite = null;
+
+        Debug.Log("아이템 획득 애니메이션 종료");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag != "Item")
+        GameObject getItem = collision.gameObject;
+
+        if (getItem.layer.ToString() != "Item")
         {
-            _ = StartCoroutine("GetItemMotions", 
-                collision.gameObject.GetComponent<ItemBase>().ItemData.itemSprite);
+            getItem.GetComponent<ItemBase>().AddStat();
+
+            if (getItem.CompareTag("UseAnimItem"))
+            {
+                _ = StartCoroutine("GetItemMotions",
+                    collision.gameObject.GetComponent<ItemBase>().ItemData.ItemIconSprite);
+            }
+
+            if(getItem.GetComponent<RareItem>() != null)
+            {
+                getItem.GetComponent<RareItem>().ItemGet();
+            }
+
+            Destroy(getItem);
         }
     }
 }
