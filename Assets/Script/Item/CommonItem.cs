@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RareItem : ItemBase
+public class CommonItem : ItemBase
 {
     protected override void ItemAnim()
     {
@@ -12,12 +12,6 @@ public class RareItem : ItemBase
     protected override void ItemGain()
     {
         base.ItemGain();
-        PlayerManager.Instance.SetCurrentBullet(this.gameObject.name);
         Debug.Log("아이템 효과 발동");
-    }
-
-    public void ItemGet()
-    {
-        ItemGain();
     }
 }

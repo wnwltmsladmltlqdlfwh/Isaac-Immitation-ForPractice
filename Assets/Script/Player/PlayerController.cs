@@ -26,14 +26,14 @@ public class PlayerController : MonoBehaviour
     private float passedTime = 0f;
 
     public Action CurrentMapChanged;
-
+    
 
     private void Awake()
     {
         stateMachine = new PlayerStateMachine(this);
         rb2D = GetComponent<Rigidbody2D>();
 
-        PlayerManager.Instance.InitPlayer(this.Data);
+        PlayerManager.Instance.InitPlayerData(this.Data);
 
         AnimationData.Initialize();
     }
@@ -102,9 +102,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnShootPoint()
     {
-        var bulletGo = PoolingManager.Instance.Pool.Get();
+        var bulletGo = PoolingManager.Instance.Pop(PlayerManager.Instance.currentBullet);
 
-        bulletGo.GetComponent<DefaultBullet>()
+        bulletGo.GetComponent<BulletBase>()
             .Init(InputManager.Instance.bulletDir, headObj.transform.position);
     }
 

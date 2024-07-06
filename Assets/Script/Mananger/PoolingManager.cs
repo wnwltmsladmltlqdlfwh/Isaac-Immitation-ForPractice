@@ -6,51 +6,82 @@ using UnityEngine.Pool;
 
 public class PoolingManager : Singleton<PoolingManager>
 {
-    public int defaultCapacity = 10;
-    public int maxPoolSize = 15;
-    public GameObject defalutBullet;
-
-    public Dictionary<string, GameObject> bulletDic = new Dictionary<string, GameObject>();
-
-    public IObjectPool<GameObject> Pool { get; private set; }
-
-    private void Awake()
+    private class Pool <T> where T : Component 
     {
-        Init();
-    }
+        private T prefab;
+        public IObjectPool<T> objPool;
+        private Transform objContainer;
 
-    private void Init()
-    {
-        Pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool,
-            OnDestroyPoolObject, true, defaultCapacity, maxPoolSize);
-
-        for(int i = 0; i < defaultCapacity; i++)
+        public Pool(T prefab)
         {
-            DefaultBullet defaultB = CreatePooledItem().GetComponent<DefaultBullet>();
-            defaultB.Pool.Release(defaultB.gameObject);
+            this.prefab = prefab;
+
+            if (objContainer == null)
+            {
+                objContainer = new GameObject($"{prefab.name}_Pool").transform;
+            }
+
+            objPool = new ObjectPool<T>(CreatePooledItem, OnGet, OnRelease,
+            OnDestroyPoolObject);
+        }
+
+        // 持失
+        private T CreatePooledItem()
+        {
+            T instantiateObj = Instantiate(prefab, objContainer);
+            instantiateObj.name = prefab.name;
+            return instantiateObj;
+        }
+
+        private void OnGet(T poolGo)
+        {
+            poolGo.gameObject.SetActive(true);
+        }
+
+        private void OnRelease(T poolGo)
+        {
+            poolGo.gameObject.SetActive(false);
+        }
+
+        private void OnDestroyPoolObject(T poolGo)
+        {
+            Destroy(poolGo.gameObject);
+        }
+
+        public T Get()
+        {
+            return objPool.Get();
+        }
+
+        public void Release(T obj)
+        {
+            if (!obj.gameObject.activeInHierarchy)
+            {
+                return;
+            }
+
+            objPool.Release(obj);
         }
     }
 
-    // 持失
-    private GameObject CreatePooledItem()
+    public Dictionary<string, object> poolList = new Dictionary<string, object>();
+
+    public void CreatePool<T>(T poolObj) where T : Component
     {
-        GameObject poolGo = Instantiate(defalutBullet);
-        poolGo.GetComponent<DefaultBullet>().Pool = this.Pool;
-        return poolGo;
+        var pool = new Pool<T>(poolObj);
+        poolList.Add(poolObj.name, pool);
     }
 
-    private void OnTakeFromPool(GameObject poolGo)
+    public T Pop<T>(T poolObj) where T : Component
     {
-        poolGo.SetActive(true);
+        if (!poolList.ContainsKey(poolObj.name))
+            CreatePool<T>(poolObj);
+
+        return ((Pool<T>)poolList[poolObj.name]).Get();
     }
 
-    private void OnReturnedToPool(GameObject poolGo)
+    public void Push<T>(T poolObj) where T : Component
     {
-        poolGo.SetActive(false);
-    }
-
-    private void OnDestroyPoolObject(GameObject poolGo)
-    {
-        Destroy(poolGo);
+        ((Pool<T>) poolList[poolObj.name]).Release(poolObj);
     }
 }

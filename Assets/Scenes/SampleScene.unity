@@ -448,9 +448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41816c3f332e661479b126185dec1667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCapacity: 10
-  maxPoolSize: 15
-  defalutBullet: {fileID: 9131002758136809665, guid: a33373c9fdc1f2f45974ed789750a9cb, type: 3}
 --- !u!1 &1313186400
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,8 +458,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1313186402}
   - component: {fileID: 1313186401}
-  - component: {fileID: 1313186403}
   - component: {fileID: 1313186404}
+  - component: {fileID: 1313186405}
   m_Layer: 6
   m_Name: TestItem
   m_TagString: NoneAnimItem
@@ -537,20 +534,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1313186403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313186400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f8893c9ad324d44a8e870890aa4d10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemData: {fileID: 11400000, guid: defb979f7c36438488dced0df562bffe, type: 2}
-  AcquisitionMessage: Test Item Get
 --- !u!61 &1313186404
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -596,6 +579,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1313186405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313186400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0633f24afe00b974e8a7beb755fffe3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemData: {fileID: 11400000, guid: defb979f7c36438488dced0df562bffe, type: 2}
+  AcquisitionMessage: 
 --- !u!1 &1356770033
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +662,7 @@ GameObject:
   - component: {fileID: 1417356565}
   - component: {fileID: 1417356564}
   m_Layer: 6
-  m_Name: TestItem (1)
+  m_Name: ABullet
   m_TagString: UseAnimItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

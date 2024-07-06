@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Defalut
   m_EditorClassIdentifier: 
   <bulletData>k__BackingField:
-    <bulletSpeed>k__BackingField: 10
-    <bulletRange>k__BackingField: 5
-    <bulletPower>k__BackingField: 5
+    <bulletSpeed>k__BackingField: 35.8
+    <bulletRange>k__BackingField: 16.2
+    <bulletPower>k__BackingField: 11.3
     <bulletSize>k__BackingField: 0.5

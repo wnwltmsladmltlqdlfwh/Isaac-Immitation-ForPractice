@@ -17,4 +17,10 @@ MonoBehaviour:
     <acceleration>k__BackingField: 10
     <deceleration>k__BackingField: 5
   <playerAttackData>k__BackingField:
-    <attackSpeed>k__BackingField: 1
+    <attackSpeed>k__BackingField: 0.5
+    <attackPower>k__BackingField: 1
+    <attackRange>k__BackingField: 10
+    <bulletSpeed>k__BackingField: 10
+  <playerConditionData>k__BackingField:
+    <StartHealthPoint>k__BackingField: 3
+    <StartShiledPoint>k__BackingField: 0
