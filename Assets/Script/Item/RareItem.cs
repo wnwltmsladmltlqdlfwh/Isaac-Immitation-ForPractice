@@ -13,6 +13,7 @@ public class RareItem : ItemBase
     {
         base.ItemGain();
         PlayerManager.Instance.SetCurrentBullet(this.gameObject.name);
+        PlayerManager.Instance.ChangedPlayerSkin("Blue");
         Debug.Log("아이템 효과 발동");
     }
 
