@@ -666,8 +666,6 @@ MonoBehaviour:
   BoomItem: 0
   MoneyItem: 0
   KeyItem: 0
-  bodyLibrary: {fileID: 0}
-  headLibrary: {fileID: 0}
 --- !u!4 &1356770035
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,7 +1029,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 46e2764bdea636849a7b553d1aa626a5, type: 2}
+  m_Sprite: {fileID: 21300000, guid: 2a322bf795aab884ea14f751e45eea33, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1078,7 +1076,7 @@ MonoBehaviour:
   m_CategoryHash: 3.4889063e-32
   m_labelHash: 1.1272761
   m_SpriteKey: 0
-  m_SpriteHash: 547184189
+  m_SpriteHash: 82942777
 --- !u!114 &1539062845
 MonoBehaviour:
   m_ObjectHideFlags: 0
