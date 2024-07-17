@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
     private float passedTime = 0f;
-
-    public Action CurrentMapChanged;
     
 
     private void Awake()

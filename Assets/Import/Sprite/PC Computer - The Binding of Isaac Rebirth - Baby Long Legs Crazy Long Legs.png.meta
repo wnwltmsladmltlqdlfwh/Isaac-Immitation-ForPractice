@@ -1,0 +1,958 @@
+fileFormatVersion: 2
+guid: 3033db194882ce54db9702f198ab22d5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 270
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7004961bf314b14c93d41519709ed00
+      internalID: -137732579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_1
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 270
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212a92754d9cfe445a0b18a6df9b24d0
+      internalID: 295723330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 270
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d6f3c4214077841b482c8904938175
+      internalID: -982574727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_3
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 270
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29358d0845e671843a3e9eaa40886f45
+      internalID: -1189279378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_4
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 270
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ed95979a67fd974593c9f1bd9cf7c09
+      internalID: 739951354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_5
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 270
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4671f925d72c850488260670ca9da2f1
+      internalID: 1695604296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 222
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1427afedfc33213448f53ba012246a17
+      internalID: -1838793184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_7
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 222
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c9e19e839d0f53458c48e4a64059965
+      internalID: -2098449687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_8
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 222
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d3cebcc4df39a341889f130fcf1000c
+      internalID: -1220027756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_9
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 222
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f4255893b41ea744a8470854c1ab980
+      internalID: 1428220937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_10
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 222
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c64101d9808442741b9c417ca32c83bd
+      internalID: 1183928233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_11
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 222
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf3e79afe3fe97a46886824c5cbf5d0c
+      internalID: 1768608919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_12
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 174
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064a1f84490ea1d4aa9df6b66362710f
+      internalID: 783484625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_13
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 174
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18a00d3ad6611bd42a9bdb993c45363d
+      internalID: -390901853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_14
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 174
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e20666e1a995a144b86acf47bd6b2db
+      internalID: -770422522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_15
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 174
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d7c0675fca6bf42b39d121049a1d93
+      internalID: 811460221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_16
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 174
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b1f3b2ad959a0541bc267f19547d209
+      internalID: -1084478245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_17
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 174
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45857564ba7e58948afcfaa8ba3529ad
+      internalID: -185574386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_18
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 126
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cddaf1710714e57458c6d5b7f53d6bd9
+      internalID: 1587888186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_19
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 126
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5874df87a8c7d4844807765a1b44bf17
+      internalID: -1595337449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_20
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 126
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20051b77e0bda2047a75a0acb5f5a161
+      internalID: 2100569461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_21
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 126
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b668a0d1c932141885b29b7ae7bb07
+      internalID: -1648970617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_22
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 126
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcc9eb90e88412d4a87ee7bda47cba48
+      internalID: 725871683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_23
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 126
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9da1148dd4942a0489d9c71b354f6eff
+      internalID: -797859787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_24
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 78
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b8982150182ab4d82ebac39651517d
+      internalID: -780231700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_25
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 78
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f80c9fae286fe154e8e3ddd3a1a74612
+      internalID: 1967863624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_26
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 78
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b921ef56737652b4e96b85d3a9c7867e
+      internalID: -757405358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_27
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 78
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d9662bbe3f1bdf4da8fb0186d59b206
+      internalID: -2095720014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_28
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 78
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3ca83ac2e871c24d84f9c6d86c2bc63
+      internalID: -87752917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_29
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 30
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37570add094232f498122d76dd9d15e6
+      internalID: 719246685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_30
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 30
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1788481dea7724aa86152fa4a2a56b
+      internalID: 181563343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_31
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 30
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6509b1718f035d4cb8755b4869c01a9
+      internalID: 1995668414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_32
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 30
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a176c4b86ae1944c9122ddae2ecaacf
+      internalID: 1871542237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_33
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 30
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d4e8dd0b81f39a4ead5b2c6f25fe8d1
+      internalID: 943789604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long
+        Legs_34
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 30
+        width: 48
+        height: 48
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f581b5173c21364997c4c22052f4a90
+      internalID: 568850751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_0: -137732579
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_1: 295723330
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_10: 1183928233
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_11: 1768608919
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_12: 783484625
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_13: -390901853
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_14: -770422522
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_15: 811460221
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_16: -1084478245
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_17: -185574386
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_18: 1587888186
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_19: -1595337449
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_2: -982574727
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_20: 2100569461
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_21: -1648970617
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_22: 725871683
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_23: -797859787
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_24: -780231700
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_25: 1967863624
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_26: -757405358
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_27: -2095720014
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_28: -87752917
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_29: 719246685
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_3: -1189279378
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_30: 181563343
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_31: 1995668414
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_32: 1871542237
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_33: 943789604
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_34: 568850751
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_4: 739951354
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_5: 1695604296
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_6: -1838793184
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_7: -2098449687
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_8: -1220027756
+      PC Computer - The Binding of Isaac Rebirth - Baby Long Legs Crazy Long Legs_9: 1428220937
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
