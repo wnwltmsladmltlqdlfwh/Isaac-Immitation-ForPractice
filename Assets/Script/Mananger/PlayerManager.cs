@@ -23,8 +23,6 @@ public class PlayerManager : Singleton<PlayerManager>
     public int MoneyItem = 0;
     public int KeyItem = 0;
 
-    public Vector2 playerPos;
-
     private Dictionary<string, BulletBase> bulletDic = new Dictionary<string, BulletBase>();
     private Dictionary<string, SpriteLibraryAsset> bodySkinDic = new Dictionary<string, SpriteLibraryAsset>();
     private Dictionary<string, SpriteLibraryAsset> headSkinDic = new Dictionary<string, SpriteLibraryAsset>();
@@ -50,8 +48,6 @@ public class PlayerManager : Singleton<PlayerManager>
 
         MoveSpeed = _Data.playerMovementData.moveSpeed;
         Deceleration = _Data.playerMovementData.deceleration;
-
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
 
     public void InitBulletDic()

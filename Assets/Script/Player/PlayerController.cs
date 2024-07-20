@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
     private float passedTime = 0f;
-    
+
+    private ObjectType objectType;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
 
         PlayerManager.Instance.InitPlayerData(this.Data);
+        ObjectManager.Instance.GetPlayerInfo(this);
 
         AnimationData.Initialize();
     }
