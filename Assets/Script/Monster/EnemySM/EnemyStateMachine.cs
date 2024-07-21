@@ -8,7 +8,7 @@ public enum StateType
     Move
 }
 
-public class EnemyStateMachine<T_Enemy> where T_Enemy : EnemyController
+public class EnemyStateMachine<T_Enemy> where T_Enemy : EnemyCharacter
 {
     public EnemyBaseState<T_Enemy> currentState;
 

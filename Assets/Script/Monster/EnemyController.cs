@@ -6,15 +6,33 @@ public class EnemyController : MonoBehaviour
 {
     public ObjectType objectType;
 
-    // Start is called before the first frame update
-    void Start()
+    public float moveSpeed = 10f;
+    public Vector2 moveDir { get; private set; }
+
+    private void Awake()
     {
-        
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Init()
     {
-        
+        objectType = ObjectType.Enemy;
+    }
+
+    public virtual void Move(Vector2 _dir)
+    {
+        moveDir = _dir;
+
+        // 이동을 각 몬스터에서 추가
+    }
+
+    public virtual void OnDamage()
+    {
+
+    }
+
+    public virtual void OnDie()
+    {
+        ObjectManager.Instance.Despawn(this);
     }
 }

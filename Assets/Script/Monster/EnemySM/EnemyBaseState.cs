@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public abstract class EnemyBaseState<T_Enemy> where T_Enemy : EnemyController
+public abstract class EnemyBaseState<T_Enemy> where T_Enemy : EnemyCharacter
 {
-    public StateType stateType {  get; private set; }
+    public StateType stateType { get; protected set; }
 
     protected T_Enemy _enemy;
     protected int animationHash;
