@@ -44,6 +44,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FireBomb"",
+                    ""type"": ""Button"",
+                    ""id"": ""b846ede0-dde8-4438-b646-34b4c8a90304"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -156,6 +165,45 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""BulletDir"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ac254bf-e153-4ab2-adb9-4aa4d0c443ba"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireBomb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UIActionsMap"",
+            ""id"": ""f720f0ce-bce3-462b-9ec6-735e50ccd252"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b34c231-fe86-489d-854c-447c352528ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4a5f49bc-4b57-4c13-b0e0-dd3d36a277e0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -183,6 +231,10 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_CharactorActionsMap = asset.FindActionMap("CharactorActionsMap", throwIfNotFound: true);
         m_CharactorActionsMap_MoveChar = m_CharactorActionsMap.FindAction("MoveChar", throwIfNotFound: true);
         m_CharactorActionsMap_BulletDir = m_CharactorActionsMap.FindAction("BulletDir", throwIfNotFound: true);
+        m_CharactorActionsMap_FireBomb = m_CharactorActionsMap.FindAction("FireBomb", throwIfNotFound: true);
+        // UIActionsMap
+        m_UIActionsMap = asset.FindActionMap("UIActionsMap", throwIfNotFound: true);
+        m_UIActionsMap_Pause = m_UIActionsMap.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,12 +298,14 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private List<ICharactorActionsMapActions> m_CharactorActionsMapActionsCallbackInterfaces = new List<ICharactorActionsMapActions>();
     private readonly InputAction m_CharactorActionsMap_MoveChar;
     private readonly InputAction m_CharactorActionsMap_BulletDir;
+    private readonly InputAction m_CharactorActionsMap_FireBomb;
     public struct CharactorActionsMapActions
     {
         private @PlayerInputSystem m_Wrapper;
         public CharactorActionsMapActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveChar => m_Wrapper.m_CharactorActionsMap_MoveChar;
         public InputAction @BulletDir => m_Wrapper.m_CharactorActionsMap_BulletDir;
+        public InputAction @FireBomb => m_Wrapper.m_CharactorActionsMap_FireBomb;
         public InputActionMap Get() { return m_Wrapper.m_CharactorActionsMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +321,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @BulletDir.started += instance.OnBulletDir;
             @BulletDir.performed += instance.OnBulletDir;
             @BulletDir.canceled += instance.OnBulletDir;
+            @FireBomb.started += instance.OnFireBomb;
+            @FireBomb.performed += instance.OnFireBomb;
+            @FireBomb.canceled += instance.OnFireBomb;
         }
 
         private void UnregisterCallbacks(ICharactorActionsMapActions instance)
@@ -277,6 +334,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @BulletDir.started -= instance.OnBulletDir;
             @BulletDir.performed -= instance.OnBulletDir;
             @BulletDir.canceled -= instance.OnBulletDir;
+            @FireBomb.started -= instance.OnFireBomb;
+            @FireBomb.performed -= instance.OnFireBomb;
+            @FireBomb.canceled -= instance.OnFireBomb;
         }
 
         public void RemoveCallbacks(ICharactorActionsMapActions instance)
@@ -294,6 +354,52 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         }
     }
     public CharactorActionsMapActions @CharactorActionsMap => new CharactorActionsMapActions(this);
+
+    // UIActionsMap
+    private readonly InputActionMap m_UIActionsMap;
+    private List<IUIActionsMapActions> m_UIActionsMapActionsCallbackInterfaces = new List<IUIActionsMapActions>();
+    private readonly InputAction m_UIActionsMap_Pause;
+    public struct UIActionsMapActions
+    {
+        private @PlayerInputSystem m_Wrapper;
+        public UIActionsMapActions(@PlayerInputSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_UIActionsMap_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_UIActionsMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActionsMapActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActionsMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsMapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsMapActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IUIActionsMapActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IUIActionsMapActions instance)
+        {
+            if (m_Wrapper.m_UIActionsMapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActionsMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsMapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsMapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActionsMapActions @UIActionsMap => new UIActionsMapActions(this);
     private int m_KeyBoardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyBoardAndMouseScheme
     {
@@ -307,5 +413,10 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     {
         void OnMoveChar(InputAction.CallbackContext context);
         void OnBulletDir(InputAction.CallbackContext context);
+        void OnFireBomb(InputAction.CallbackContext context);
+    }
+    public interface IUIActionsMapActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

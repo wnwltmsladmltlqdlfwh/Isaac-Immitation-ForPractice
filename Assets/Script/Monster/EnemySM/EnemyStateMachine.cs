@@ -5,7 +5,9 @@ using UnityEngine;
 public enum StateType
 { // 사용할(만들) 몬스터의 State
     Idle,
-    Move
+    Patrol,
+    Chase,
+    Die
 }
 
 public class EnemyStateMachine<T_Enemy> where T_Enemy : EnemyCharacter

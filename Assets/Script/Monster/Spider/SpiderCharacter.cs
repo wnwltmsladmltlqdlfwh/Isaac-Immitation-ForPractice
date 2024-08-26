@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class SpiderCharacter : EnemyCharacter
 {
+    public int healthPoint;
+
     public EnemyStateMachine<SpiderCharacter> stateMachine { get; private set; }
+
+    public float ChasedPlayerDistance;
 
     protected override void Init()
     {
         base.Init();
 
         stateMachine = new EnemyStateMachine<SpiderCharacter>();
-        stateMachine.AddStateList(new SpiderStateMove(this));
+        stateMachine.AddStateList(new SpiderStatePatrol(this));
+        stateMachine.AddStateList(new SpiderStateIdle(this));
+        stateMachine.AddStateList(new SpiderStateChase(this));
+        stateMachine.AddStateList(new SpiderStateDie(this));
+    }
+
+    private void Update()
+    {
+        if(PlayerManager.Instance.playerIsDead) return;
+
+        stateMachine.Update();
     }
 }

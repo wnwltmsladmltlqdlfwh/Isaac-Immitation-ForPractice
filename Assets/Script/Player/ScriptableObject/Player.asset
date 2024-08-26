@@ -22,5 +22,5 @@ MonoBehaviour:
     <attackRange>k__BackingField: 10
     <bulletSpeed>k__BackingField: 10
   <playerConditionData>k__BackingField:
-    <StartHealthPoint>k__BackingField: 3
+    <StartHealthPoint>k__BackingField: 6
     <StartShiledPoint>k__BackingField: 0

@@ -7,9 +7,63 @@ using UnityEngine.U2D.Animation;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public int MaxHP;
-    public int CurHP;
-    public int Shiled;
+    private int maxHp;
+    public int MaxHP
+    {
+        get { return maxHp; }
+        set
+        {
+            if (maxHp != value)
+            {
+                maxHp = value;
+            }
+            if (curHp > maxHp)
+            {
+                curHp = maxHp;
+            }
+            OnHealthChanged?.Invoke();
+        }
+    }
+    private int curHp;
+    public int CurHP
+    {
+        get { return curHp; }
+        set
+        {
+            if (curHp != value)
+            {
+                curHp = value;
+                
+                if (curHp == 0)
+                {
+                    playerIsDead = true;
+                }
+
+                if (curHp > maxHp)
+                {
+                    curHp = maxHp;
+                }
+
+                OnHealthChanged?.Invoke();
+            }
+        }
+    }
+
+    private int shiled;
+    public int Shiled
+    {
+        get => shiled;
+        set
+        {
+            if(shiled != value)
+            {
+                shiled = value;
+                OnHealthChanged?.Invoke();
+            }
+        }
+    }
+
+    public event Action OnHealthChanged;
 
     public float AttackSpeed;
     public float AttackPower;
@@ -19,20 +73,74 @@ public class PlayerManager : Singleton<PlayerManager>
     public float MoveSpeed;
     public float Deceleration;
 
-    public int BoomItem = 0;
-    public int MoneyItem = 0;
-    public int KeyItem = 0;
+    public bool playerIsDead = false;
+
+    private int bombItem;
+    public int BombItem
+    {
+        get { return bombItem; }
+        set
+        {
+            if(bombItem != value)
+            {
+                bombItem = value;
+                OnCurrencyChanged?.Invoke();
+            }
+        }
+    }
+
+    private int moneyItem;
+    public int MoneyItem
+    {
+        get { return moneyItem; }
+        set
+        {
+            if(moneyItem != value)
+            {
+                moneyItem = value;
+                OnCurrencyChanged?.Invoke();
+            }
+        }
+    }
+
+    private int keyItem;
+    public int KeyItem
+    {
+        get => keyItem;
+        set
+        {
+            if(keyItem != value)
+            {
+                keyItem = value;
+                OnCurrencyChanged?.Invoke();
+            }
+        }
+    }
+
+    public event Action OnCurrencyChanged;
 
     private Dictionary<string, BulletBase> bulletDic = new Dictionary<string, BulletBase>();
     private Dictionary<string, SpriteLibraryAsset> bodySkinDic = new Dictionary<string, SpriteLibraryAsset>();
     private Dictionary<string, SpriteLibraryAsset> headSkinDic = new Dictionary<string, SpriteLibraryAsset>();
     public BulletBase currentBullet { get; private set; }
 
+    public BulletExplodeEffect explodeEffect;
+
+    public Dictionary<string, bool> bulletOptions = new Dictionary<string, bool>();
+
     private void Start()
     {
         InitBulletDic();
         InitSkinDic();
+        InitBulletOptionsDic();
         SetCurrentBullet("DefalutBullet");
+
+        BombItem = 0;
+
+        BombItem += 10;
+
+        KeyItem = 0;
+        MoneyItem = 0;
     }
 
     public void InitPlayerData(PlayerSO _Data)
@@ -88,6 +196,11 @@ public class PlayerManager : Singleton<PlayerManager>
             Debug.Log(headSkinArray[i].name);
             headSkinDic.Add(headSkinArray[i].name, headSkinArray[i]);
         }
+    }
+
+    private void InitBulletOptionsDic()
+    {
+        bulletOptions.Add("Homing", false); //유도기능
     }
 
     public void SetCurrentBullet(string bulletName)

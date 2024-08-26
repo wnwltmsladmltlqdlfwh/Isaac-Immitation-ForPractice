@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem.DualShock;
-using UnityEngine.UIElements;
+
+public enum RoomType
+{
+    start,
+    nomal,
+    boss,
+    golden,
+    needkey,
+    spawnMonster,
+    shop,
+}
 
 public class Room : MonoBehaviour
 {
-    public enum ThisRoomIs
-    {
-        start,
-        nomal,
-        boss,
-        golden,
-        needkey,
-    }
-
-    public ThisRoomIs property;
+    public RoomType roomType;
     public int roomPosX;
     public int roomPosY;
 
@@ -32,6 +31,7 @@ public class Room : MonoBehaviour
 
     public bool isUsed = false;
     public bool aroundRoomsFull = false;
+    private bool isSpawned = false;
 
     SpriteRenderer SpriteRenderer;
 
@@ -45,18 +45,24 @@ public class Room : MonoBehaviour
         DungeonManager.Instance.onRoomChange += CheckAroundRoom;
     }
 
+    private void Start()
+    {
+    }
+
     public void InitRoomArrayPos(int posX, int posY)
     {
         this.roomPosX = posX;
         this.roomPosY = posY;
 
-        this.gameObject.transform.position = new Vector2(roomPosX * 20f, roomPosY * 12f);
+        this.gameObject.transform.position = new Vector2(roomPosX * 40f, roomPosY * 20f);
     }
 
     public void IsStartRoom()
     {
         this.isUsed = true;
+        this.roomType = RoomType.start;
         this.SpriteRenderer.color = Color.red;
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -20);
     }
 
     public void IsUsedRoom()
@@ -108,14 +114,106 @@ public class Room : MonoBehaviour
 
     private void CheckDoorEnable()
     {
-        leftDoor.gameObject.SetActive(leftRoom != null);
-        rightDoor.gameObject.SetActive(rightRoom != null);
-        topDoor.gameObject.SetActive(topRoom != null);
-        bottomDoor.gameObject.SetActive(bottomRoom != null);
+        if(leftRoom != null)
+        {
+            leftDoor.gameObject.SetActive(leftRoom != null);
+            leftDoor.dir = DoorDir.left;
+            leftDoor.SetNearbyRoomDoor(leftRoom.roomType);
+        }
+        else
+        {
+            leftDoor.gameObject.SetActive(false);
+        }
+
+        if (rightRoom != null)
+        {
+            rightDoor.gameObject.SetActive(rightRoom != null);
+            rightDoor.dir = DoorDir.right;
+            rightDoor.SetNearbyRoomDoor(rightRoom.roomType);
+        }
+        else
+        {
+            rightDoor.gameObject.SetActive(false);
+        }
+
+        if (topRoom != null)
+        {
+            topDoor.gameObject.SetActive(topRoom != null);
+            topDoor.dir = DoorDir.up;
+            topDoor.SetNearbyRoomDoor(topRoom.roomType);
+        }
+        else
+        {
+            topDoor.gameObject.SetActive(false);
+        }
+
+        if (bottomRoom != null)
+        {
+            bottomDoor.gameObject.SetActive(bottomRoom != null);
+            bottomDoor.dir = DoorDir.down;
+            bottomDoor.SetNearbyRoomDoor(bottomRoom.roomType);
+        }
+        else
+        {
+            bottomDoor.gameObject.SetActive(false);
+        }
+
+        if (this.roomType == RoomType.golden || this.roomType == RoomType.boss)
+        {
+            leftDoor.SetNearbyRoomDoor(this.roomType);
+            rightDoor.SetNearbyRoomDoor(this.roomType);
+            topDoor.SetNearbyRoomDoor(this.roomType);
+            bottomDoor.SetNearbyRoomDoor(this.roomType);
+        }
     }
 
-    private void OnDisable()
+    public int CountedRoomAround()
     {
-        //DungeonManager.Instance.onRoomChange -= CheckAroundRoom;
+        int value = 0;
+
+        if (leftRoom != null)
+            value += 1;
+
+        if (rightRoom != null)
+            value += 1;
+
+        if (topRoom != null)
+            value += 1;
+
+        if (bottomRoom != null)
+            value += 1;
+
+        return value;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            switch (roomType)
+            {
+                case RoomType.boss:
+                    Debug.Log("보스방 입장");
+                    break;
+                case RoomType.spawnMonster:
+                    if (!isSpawned)
+                    {
+                        isSpawned = !isSpawned;
+                        GameManager.Instance.MonsterSpawn(5);
+                        DungeonManager.Instance.onRoomChange?.Invoke();
+                    }
+                    Debug.Log("몬스터 방 입장");
+                    break;
+                case RoomType.golden:
+                    Debug.Log("황금방 입장");
+                    break;
+                case RoomType.needkey:
+                    Debug.Log("열쇠방 입장");
+                    break;
+                case RoomType.nomal:
+                    Debug.Log("일반방 입장");
+                    break;
+            }
+        }
     }
 }

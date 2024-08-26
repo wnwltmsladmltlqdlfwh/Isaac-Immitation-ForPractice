@@ -12,7 +12,27 @@ public class ObjectManager : Singleton<ObjectManager>
     public Dictionary<ObjectType, List<EnemyController>> enemyPrefabsList =
         new Dictionary<ObjectType, List<EnemyController>>();
     // 플레이어 오브젝트만을 관리하는 용도
-    PlayerController Player;
+    public PlayerController Player;
+
+    public Bomb bombPrefab;
+    public BombExplordeEffect bombExplordeEffect;
+
+    [SerializeField] private List<PickUpItem> pickUpItemList;
+
+    private void Awake()
+    {
+        InitThisManager();
+    }
+
+    private void InitThisManager()
+    {
+        var pickUpItemArray = Resources.LoadAll<PickUpItem>("Prefab/PickUpItems");
+        if (pickUpItemArray == null) { return; }
+        for (int i = 0; i < pickUpItemArray.Length; i++)
+        {
+            pickUpItemList.Add(pickUpItemArray[i]);
+        }
+    }
 
     public T_Enemy Spawn<T_Enemy>(T_Enemy objectPrefab, Vector3 postion = default, Quaternion rotaion = default) where T_Enemy : EnemyController
     {
@@ -51,8 +71,41 @@ public class ObjectManager : Singleton<ObjectManager>
         this.Player = player;
     }
 
-    public Vector2 PlayerPosition()
+    public Vector3 PlayerPosition()
     {
         return Player.gameObject.transform.position;
+    }
+
+    public void PoolingBombPrefab()
+    {
+        var pooledBomb = PoolingManager.Instance.Pop(bombPrefab);
+
+        PlayerManager.Instance.BombItem -= 1;
+
+        pooledBomb.transform.position = Player.transform.position;
+
+        pooledBomb.Init();
+    }
+
+    public void BoomExplodeEffect(Vector3 effectPos)
+    {
+        var poolEffect = PoolingManager.Instance.Pop(bombExplordeEffect);
+        poolEffect.transform.position = effectPos;
+    }
+
+    public void PoolingPickUpItems()
+    {
+        int makeItemCount = UnityEngine.Random.Range(1, 5);
+
+        for (int i = 0; i < makeItemCount; i++)
+        {
+            int setItem = UnityEngine.Random.Range(0, pickUpItemList.Count);
+
+            var pooledItem = PoolingManager.Instance.Pop(pickUpItemList[setItem]);
+
+            Vector3 randPos = (Vector3)UnityEngine.Random.insideUnitCircle * 2f;
+
+            pooledItem.transform.position = DungeonManager.Instance.currentRoom.transform.position + randPos;
+        }
     }
 }

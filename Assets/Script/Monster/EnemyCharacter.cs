@@ -34,18 +34,11 @@ public class EnemyCharacter : MonoBehaviour
 
     }
 
-    public void SetMoveDirection(Vector2 dir)
+    public void SetMoveDirection(Vector3 dir)
     {
         Controller.Move(dir);
 
         if (dir.x != 0)
             spriteRenderer.flipX = dir.x < 0;
-    }
-
-    public void SetMoveTarget(Vector3 targetPos)
-    {
-        var dir = targetPos - this.transform.position;
-
-        SetMoveDirection(dir);
     }
 }

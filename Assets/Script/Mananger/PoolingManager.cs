@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 
 public class PoolingManager : Singleton<PoolingManager>
 {
-    private class Pool <T> where T : Component 
+    private class Pool <T> where T : Component
     {
         private T prefab;
         public IObjectPool<T> objPool;

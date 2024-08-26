@@ -6,8 +6,12 @@ public class EnemyController : MonoBehaviour
 {
     public ObjectType objectType;
 
-    public float moveSpeed = 10f;
+    public float moveSpeed = 1f;
     public Vector2 moveDir { get; private set; }
+
+    public bool isDead = false;
+
+    public float healthPoint;
 
     private void Awake()
     {
@@ -22,17 +26,25 @@ public class EnemyController : MonoBehaviour
     public virtual void Move(Vector2 _dir)
     {
         moveDir = _dir;
-
-        // 이동을 각 몬스터에서 추가
     }
 
-    public virtual void OnDamage()
+    public virtual void OnDamage(float damage)
     {
+        healthPoint -= damage; //PlayerManager.Instance.AttackPower;
 
+        if (healthPoint <= 0)
+        {
+            OnDie();
+        }
     }
 
     public virtual void OnDie()
     {
-        ObjectManager.Instance.Despawn(this);
+        isDead = true;
+
+        if (GameManager.Instance.CurRoomMonsterCount > 0)
+        {
+            GameManager.Instance.CurRoomMonsterCount--;
+        }
     }
 }

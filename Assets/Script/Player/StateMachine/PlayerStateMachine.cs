@@ -9,6 +9,7 @@ public class PlayerStateMachine : StateMachine
     //상태
     public IdleBodyState idleBodyState;
     public WalkBodyState walkBodyState;
+    public DeadState deadState;
 
     //이동 관련
     public Vector2 MovementInput { get; set; }
@@ -20,6 +21,7 @@ public class PlayerStateMachine : StateMachine
 
         idleBodyState = new IdleBodyState(this);
         walkBodyState = new WalkBodyState(this);
+        deadState = new DeadState(this);
 
         MoveSpeed = player.Data.playerMovementData.moveSpeed;
     }

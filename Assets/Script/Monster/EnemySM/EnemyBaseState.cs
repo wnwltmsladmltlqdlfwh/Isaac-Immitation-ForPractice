@@ -7,12 +7,13 @@ public abstract class EnemyBaseState<T_Enemy> where T_Enemy : EnemyCharacter
 {
     public StateType stateType { get; protected set; }
 
-    protected T_Enemy _enemy;
+    protected T_Enemy _enemyChar;
     protected int animationHash;
+    protected float statePassTime;
 
     public EnemyBaseState(T_Enemy t_Enemy)
     {
-        this._enemy = t_Enemy;
+        this._enemyChar = t_Enemy;
     }
 
     public void OnStart()
