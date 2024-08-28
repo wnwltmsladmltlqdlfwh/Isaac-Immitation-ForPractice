@@ -27,6 +27,8 @@ public class GameManager : Singleton<GameManager>
 
     Camera mainCam;
 
+    public float spawnCountTime = 1f;
+
     private void Awake()
     {
         mainCam = Camera.main;
@@ -34,7 +36,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-
+        if (spawnCountTime >= 0f)
+        {
+            spawnCountTime -= Time.deltaTime;
+        }
     }
 
     public void SetPlayerOnStartRoom()
@@ -99,8 +104,10 @@ public class GameManager : Singleton<GameManager>
         mainCam.transform.position = targetPos;
     }
 
-    public void MonsterSpawn(int a)
+    public IEnumerator MonsterSpawn(int a)
     {
+        yield return new WaitForSeconds(1f);
+
         for (int i = 0; i < a; i++)
         {
             Vector3 randPos = (Vector3)UnityEngine.Random.insideUnitCircle * 3f;
@@ -109,7 +116,7 @@ public class GameManager : Singleton<GameManager>
             testmonster.isDead = false;
         }
 
-        CurRoomMonsterCount = a;
+        //CurRoomMonsterCount = a;
     }
 
     public void ItemSpawn()

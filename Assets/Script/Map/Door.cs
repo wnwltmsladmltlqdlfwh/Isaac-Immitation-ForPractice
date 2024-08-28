@@ -21,6 +21,21 @@ public class Door : MonoBehaviour
     [SerializeField] private Sprite goldenDoor;
     [SerializeField] private Sprite needKeyDoor;
 
+
+    [Header("문 배경 이미지")]
+    [SerializeField] private SpriteRenderer closeDoorObject;
+    [SerializeField] private SpriteRenderer openDoorObject;
+    [SerializeField] private SpriteRenderer closeDoorLeftSR;
+    [SerializeField] private SpriteRenderer closeDoorRightSR;
+
+    [SerializeField] private Sprite closeBossLeftSprite;
+    [SerializeField] private Sprite closeBossRightSprite;
+    [SerializeField] private Sprite openBossSprite;
+
+    [SerializeField] private Sprite closeOtherLeftSprite;
+    [SerializeField] private Sprite closeOtherRightSprite;
+    [SerializeField] private Sprite openOtherSprtie;
+
     public bool isOpen
     {
         get { return GameManager.Instance.CurRoomMonsterCount == 0; }
@@ -43,6 +58,7 @@ public class Door : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameManager.Instance.PlayerMoveNextRoom(this);
+            DungeonManager.Instance.onRoomChange?.Invoke();
         }
     }
 
@@ -51,10 +67,14 @@ public class Door : MonoBehaviour
         switch (isOpen)
         {
             case true:
-                doorRenderer.color = Color.white;
+                //doorRenderer.color = Color.white;
+                openDoorObject.gameObject.SetActive(true);
+                closeDoorObject.gameObject.SetActive(false);
                 break;
             case false:
-                doorRenderer.color = Color.red;
+                //doorRenderer.color = Color.red;
+                openDoorObject.gameObject.SetActive(false);
+                closeDoorObject.gameObject.SetActive(true);
                 break;
         }
     }
@@ -75,6 +95,19 @@ public class Door : MonoBehaviour
             default:
                 doorRenderer.sprite = defaultDoor;
                 break;
+        }
+
+        if (nearRoom == RoomType.boss)
+        {
+            openDoorObject.sprite = openBossSprite;
+            closeDoorLeftSR.sprite = closeBossLeftSprite;
+            closeDoorRightSR.sprite = closeBossRightSprite;
+        }
+        else
+        {
+            openDoorObject.sprite = openOtherSprtie;
+            closeDoorLeftSR.sprite = closeOtherLeftSprite;
+            closeDoorRightSR.sprite = closeOtherRightSprite;
         }
     }
 }

@@ -32,6 +32,7 @@ public class Room : MonoBehaviour
     public bool isUsed = false;
     public bool aroundRoomsFull = false;
     private bool isSpawned = false;
+    public bool isVisited = false;
 
     SpriteRenderer SpriteRenderer;
 
@@ -198,9 +199,13 @@ public class Room : MonoBehaviour
                 case RoomType.spawnMonster:
                     if (!isSpawned)
                     {
+                        int randomSpawn = UnityEngine.Random.Range(4,8);
+                        GameManager.Instance.CurRoomMonsterCount = randomSpawn;
                         isSpawned = !isSpawned;
-                        GameManager.Instance.MonsterSpawn(5);
                         DungeonManager.Instance.onRoomChange?.Invoke();
+
+                        _ = StartCoroutine(GameManager.Instance.MonsterSpawn(randomSpawn));
+                        
                     }
                     Debug.Log("몬스터 방 입장");
                     break;
@@ -214,6 +219,8 @@ public class Room : MonoBehaviour
                     Debug.Log("일반방 입장");
                     break;
             }
+
+            isVisited = true;
         }
     }
 }

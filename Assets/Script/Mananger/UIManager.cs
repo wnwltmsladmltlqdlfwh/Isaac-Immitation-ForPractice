@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -18,12 +20,21 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI boomText;
     public TextMeshProUGUI keyText;
 
+    [SerializeField] private Image minimapParent;
+    [SerializeField] private Image minimapPrefab;
+
+    [SerializeField] private Image[,] minimapSize;
+
     private void Awake()
     {
+        minimapSize = new Image[DungeonManager.Instance.maxXValue, DungeonManager.Instance.maxYValue];
+
         PlayerManager.Instance.OnHealthChanged += ChangedHealthUI;
         PlayerManager.Instance.OnCurrencyChanged += ChangedCurrencyUI;
 
-        DungeonManager.Instance.onRoomChange += MiniMapUI;
+        DungeonManager.Instance.onRoomChange += UpdateMiniMapState;
+
+        InitMiniMap();
     }
 
     private void Start()
@@ -73,8 +84,59 @@ public class UIManager : Singleton<UIManager>
         keyText.text = PlayerManager.Instance.KeyItem.ToString();
     }
 
-    private void MiniMapUI()
+    private void InitMiniMap()
     {
+        for (int i = 0; i < DungeonManager.Instance.maxXValue; i++)
+        {
+            for (int j = 0; j < DungeonManager.Instance.maxYValue; j++)
+            {
+                var minimapRoom = PoolingManager.Instance.Pop(minimapPrefab);
+                minimapRoom.transform.parent = minimapParent.transform;
+                minimapSize[i, j] = minimapRoom;
+                minimapRoom.name = $"MiniMap Num {i},{j}";
+            }
+        }
+    }
 
+    private void UpdateMiniMapState()
+    {
+        for(int i = 0; i < DungeonManager.Instance.maxXValue; i++)
+        {
+            for(int j = 0; j < DungeonManager.Instance.maxYValue; j++)
+            {
+                var targetRoom = DungeonManager.Instance.dungeonSize[i, j];
+
+                var setColor = minimapSize[i, j].color;
+
+                if (!targetRoom.isUsed)
+                {
+                    setColor.a = 0;
+                    minimapSize[i,j].color = setColor;
+                }
+                else
+                {
+                    if(targetRoom == DungeonManager.Instance.currentRoom)
+                    {
+                        Debug.Log(targetRoom.name + "은 현재 방입니다.");
+                        minimapSize[i, j].color = Color.blue;
+                    }
+                    else
+                    {
+                        Debug.Log(targetRoom.name + "세팅");
+                        minimapSize[i, j].color = new Color(100, 100, 100);
+
+                        if (targetRoom.isVisited)
+                        {
+                            minimapSize[i, j].color = Color.white;
+                        }
+                    }
+                }
+
+                if(targetRoom.roomType == RoomType.boss)
+                {
+                    minimapSize[i, j].color = Color.red;
+                }
+            }
+        }
     }
 }

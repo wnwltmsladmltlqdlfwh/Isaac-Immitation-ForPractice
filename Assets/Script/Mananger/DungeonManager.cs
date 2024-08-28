@@ -12,8 +12,8 @@ public class DungeonManager : Singleton<DungeonManager>
     public Room currentRoom;
     private List<Room> dungeonList = new List<Room>();
 
-    [SerializeField] private int maxXValue;
-    [SerializeField] private int maxYValue;
+    public int maxXValue;
+    public int maxYValue;
     [SerializeField] private Room RoomPrefab;
     [SerializeField] private int disconnectedRoomCount;
 
@@ -34,14 +34,6 @@ public class DungeonManager : Singleton<DungeonManager>
     private void Awake()
     {
         dungeonSize = new Room[maxXValue, maxYValue];
-
-        //if (roomsParent == null)
-        //{
-        //    var parent = Instantiate(new GameObject());
-        //    parent.name = "RoomParent";
-        //    parent.transform.position = Vector3.zero;
-        //    roomsParent = parent.transform;
-        //}
     }
 
     private void OnEnable()
@@ -163,11 +155,6 @@ public class DungeonManager : Singleton<DungeonManager>
             randomRoom.roomType = RoomType.golden;
         }
 
-        if (CheckNullBossRoom())
-        {
-            dungeonList[UnityEngine.Random.Range(0, dungeonList.Count)].roomType = RoomType.boss;
-        }
-
         for (int i = 0; i < maxXValue; i++)
         {
             for (int j = 0; j < maxYValue; j++)
@@ -182,6 +169,23 @@ public class DungeonManager : Singleton<DungeonManager>
         GameManager.Instance.SetPlayerOnStartRoom();
 
         onRoomChange?.Invoke();
+
+        if (CheckNullBossRoom())
+        {
+            foreach (var dungeon in forRoomSetList)
+            {
+                if (dungeon.CountedRoomAround() == 1 && dungeon.roomType != RoomType.golden
+                    && dungeon.roomType != RoomType.start && dungeon.roomType != RoomType.shop && dungeon.roomType != RoomType.needkey)
+                {
+                    dungeon.roomType = RoomType.boss;
+                    Debug.Log($"{dungeon.name}을 보스룸으로 설정");
+                    break;
+                }
+            }
+            //dungeonList[UnityEngine.Random.Range(0, dungeonList.Count)].roomType = RoomType.boss;
+            onRoomChange?.Invoke();
+        }
+
     }
 
     private bool CheckOverSpecialRooms()
@@ -213,9 +217,12 @@ public class DungeonManager : Singleton<DungeonManager>
         {
             if(dungeon.roomType == RoomType.boss)
             {
+                Debug.Log("보스룸 생성 완료");
+                
                 return false;
             }
         }
+        Debug.Log("보스룸 미생성");
         return true;
     }
 
