@@ -7,7 +7,10 @@ public enum StateType
     Idle,
     Patrol,
     Chase,
-    Die
+    Die,
+    Pattern_One,
+    Pattern_Two,
+    Pattern_Three,
 }
 
 public class EnemyStateMachine<T_Enemy> where T_Enemy : EnemyCharacter

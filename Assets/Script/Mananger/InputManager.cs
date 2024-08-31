@@ -50,30 +50,30 @@ public class InputManager : Singleton<InputManager>
     public void OnMoveChar(InputAction.CallbackContext callbackContext)
     {
         if (PlayerManager.Instance.playerIsDead)
-        {
             return;
-        }
+
         moveDir = callbackContext.ReadValue<Vector2>();
     }
 
     public void OnBulletDir(InputAction.CallbackContext callbackContext)
     {
-        if (PlayerManager.Instance.playerIsDead) { return; }
+        if (PlayerManager.Instance.playerIsDead)
+            return;
 
         isShooting = charInput.BulletDir.IsPressed();
 
         var inputDir = callbackContext.ReadValue<Vector2>();
+
         if (inputDir == Vector2.zero)
-        {
             return;
-        }
 
         bulletDir = inputDir;
     }
 
     public void OnFireBomb(InputAction.CallbackContext callbackContext)
     {
-        if (PlayerManager.Instance.playerIsDead || PlayerManager.Instance.BombItem <= 0) { return; }
+        if (PlayerManager.Instance.playerIsDead || PlayerManager.Instance.BombItem <= 0)
+            return;
 
         Debug.Log("ÆøÅº»ý¼º");
 

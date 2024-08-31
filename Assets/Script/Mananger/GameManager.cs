@@ -106,17 +106,37 @@ public class GameManager : Singleton<GameManager>
 
     public IEnumerator MonsterSpawn(int a)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitUntil(CamMoveCenter);
 
         for (int i = 0; i < a; i++)
         {
-            Vector3 randPos = (Vector3)UnityEngine.Random.insideUnitCircle * 3f;
+            Vector3 randPos = (Vector3)UnityEngine.Random.insideUnitCircle * 2f;
 
-            var testmonster = ObjectManager.Instance.Spawn<SpiderController>(testMonster, DungeonManager.Instance.currentRoom.transform.position + randPos);
-            testmonster.isDead = false;
+            var spawnMonster = ObjectManager.Instance.Spawn<SpiderController>(testMonster, DungeonManager.Instance.currentRoom.transform.position + randPos);
+            spawnMonster.isDead = false;
         }
+    }
 
-        //CurRoomMonsterCount = a;
+    public IEnumerator BossSpawn()
+    {
+        yield return new WaitUntil(CamMoveCenter);
+
+        var spawnBoss = ObjectManager.Instance.Spawn<SpiderController>(testMonster, DungeonManager.Instance.currentRoom.transform.position);
+        spawnBoss.isDead = false;
+    }
+
+    public bool CamMoveCenter()
+    {
+        var curRoom = DungeonManager.Instance.currentRoom;
+
+        if (curRoom.transform.position.x == mainCam.transform.position.x && curRoom.transform.position.y == mainCam.transform.position.y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void ItemSpawn()

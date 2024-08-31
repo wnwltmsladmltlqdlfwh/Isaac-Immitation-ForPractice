@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SpiderCharacter : EnemyCharacter
 {
-    public int healthPoint;
-
     public EnemyStateMachine<SpiderCharacter> stateMachine { get; private set; }
 
     public float ChasedPlayerDistance;

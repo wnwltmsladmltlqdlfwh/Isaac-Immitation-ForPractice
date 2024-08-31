@@ -91,7 +91,7 @@ public class UIManager : Singleton<UIManager>
             for (int j = 0; j < DungeonManager.Instance.maxYValue; j++)
             {
                 var minimapRoom = PoolingManager.Instance.Pop(minimapPrefab);
-                minimapRoom.transform.parent = minimapParent.transform;
+                minimapRoom.rectTransform.SetParent(minimapParent.rectTransform, false);
                 minimapSize[i, j] = minimapRoom;
                 minimapRoom.name = $"MiniMap Num {i},{j}";
             }
@@ -123,18 +123,25 @@ public class UIManager : Singleton<UIManager>
                     else
                     {
                         Debug.Log(targetRoom.name + "¼¼ÆÃ");
-                        minimapSize[i, j].color = new Color(100, 100, 100);
 
                         if (targetRoom.isVisited)
                         {
                             minimapSize[i, j].color = Color.white;
                         }
+                        else
+                        {
+                            minimapSize[i, j].color = new Color(0.7f, 0.7f, 0.7f);
+                        }
                     }
                 }
 
-                if(targetRoom.roomType == RoomType.boss)
+                if (targetRoom.roomType == RoomType.boss)
                 {
                     minimapSize[i, j].color = Color.red;
+                }
+                else if (targetRoom.roomType == RoomType.golden)
+                {
+                    minimapSize[i,j].color = Color.yellow;
                 }
             }
         }

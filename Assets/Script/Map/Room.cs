@@ -191,10 +191,17 @@ public class Room : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            isVisited = true;
+
             switch (roomType)
             {
                 case RoomType.boss:
                     Debug.Log("보스방 입장");
+                    if (!isSpawned)
+                    {
+                        _= StartCoroutine(GameManager.Instance.BossSpawn());
+                        isSpawned = !isSpawned;
+                    }
                     break;
                 case RoomType.spawnMonster:
                     if (!isSpawned)
@@ -207,20 +214,14 @@ public class Room : MonoBehaviour
                         _ = StartCoroutine(GameManager.Instance.MonsterSpawn(randomSpawn));
                         
                     }
-                    Debug.Log("몬스터 방 입장");
                     break;
                 case RoomType.golden:
-                    Debug.Log("황금방 입장");
                     break;
                 case RoomType.needkey:
-                    Debug.Log("열쇠방 입장");
                     break;
                 case RoomType.nomal:
-                    Debug.Log("일반방 입장");
                     break;
             }
-
-            isVisited = true;
         }
     }
 }
