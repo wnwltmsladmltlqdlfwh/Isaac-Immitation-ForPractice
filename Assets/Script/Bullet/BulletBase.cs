@@ -1,8 +1,6 @@
-using System.Buffers.Text;
-using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class BulletBase : MonoBehaviour
 {
@@ -101,7 +99,10 @@ public class BulletBase : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyController>().OnDamage(PlayerManager.Instance.AttackPower);
 
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - this.transform.position).normalized * 100f);
+            if (!collision.gameObject.GetComponent<MonstroController>())
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - this.transform.position).normalized * 100f);
+            }
 
             ReturnBullet();
         }

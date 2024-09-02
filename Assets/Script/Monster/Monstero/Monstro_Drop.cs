@@ -22,12 +22,19 @@ public class Monstro_Drop : EnemyBaseState<MonstroCharacter>
         startPos = _enemyChar.Controller.transform.position;
         targetPos = ObjectManager.Instance.PlayerPosition();
 
-        moveTime = 4f;
+        startTime = 0f;
+        moveTime = 3f;
     }
 
     protected override void StateUpdate()
     {
         DropDown();
+
+        if (_enemyChar.Controller.transform.position == targetPos)
+        {
+            _enemyChar.animator.SetTrigger(animationHash);
+            _enemyChar.stateMachine.ChangeState(StateType.Idle);
+        }
     }
 
     void DropDown()
@@ -39,15 +46,10 @@ public class Monstro_Drop : EnemyBaseState<MonstroCharacter>
 
             _enemyChar.Controller.transform.position = Vector3.Lerp(startPos, targetPos, fractionOfJourney);
         }
-        else
-        {
-            _enemyChar.animator.SetTrigger(animationHash);
-            _enemyChar.stateMachine.ChangeState(StateType.Idle);
-        }
     }
 
     protected override void StateExit()
     {
-        throw new System.NotImplementedException();
+        _enemyChar.stampPassTime = 10.0f;
     }
 }

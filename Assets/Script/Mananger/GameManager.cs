@@ -5,6 +5,8 @@ public class GameManager : Singleton<GameManager>
 {
     public SpiderController testMonster;
 
+    public MonstroController isBoss;
+
     private int curRoomMonsterCount;
 
     public int CurRoomMonsterCount
@@ -112,7 +114,7 @@ public class GameManager : Singleton<GameManager>
         {
             Vector3 randPos = (Vector3)UnityEngine.Random.insideUnitCircle * 2f;
 
-            var spawnMonster = ObjectManager.Instance.Spawn<SpiderController>(testMonster, DungeonManager.Instance.currentRoom.transform.position + randPos);
+            var spawnMonster = ObjectManager.Instance.Spawn(testMonster, DungeonManager.Instance.currentRoom.transform.position + randPos);
             spawnMonster.isDead = false;
         }
     }
@@ -121,8 +123,10 @@ public class GameManager : Singleton<GameManager>
     {
         yield return new WaitUntil(CamMoveCenter);
 
-        var spawnBoss = ObjectManager.Instance.Spawn<SpiderController>(testMonster, DungeonManager.Instance.currentRoom.transform.position);
+        var spawnBoss = ObjectManager.Instance.Spawn(isBoss, DungeonManager.Instance.currentRoom.transform.position);
         spawnBoss.isDead = false;
+        UIManager.Instance.BossBattleUI(true);
+        UIManager.Instance.bossHealthUI.value = 1f;
     }
 
     public bool CamMoveCenter()

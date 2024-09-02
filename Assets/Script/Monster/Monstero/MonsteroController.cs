@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class MonstroController : EnemyController
 {
-    public float shotPassTime;
-    public float stampPassTime;
+    public float MaxHealthPoint;
 
     void Start()
     {
-        healthPoint = 250f;
-        shotPassTime = 8.0f;
-        stampPassTime = 10.0f;
+        CurHealthPoint = 250f;
+
+        MaxHealthPoint = CurHealthPoint;
     }
 
     private void Update()
     {
-        if(shotPassTime > 0)
-        {
-            shotPassTime -= Time.deltaTime;
-        }
 
-        if (stampPassTime > 0)
-        {
-            stampPassTime -= Time.deltaTime;
-        }
     }
 
     public override void Move(Vector2 _dir)
@@ -37,11 +28,23 @@ public class MonstroController : EnemyController
     public override void OnDamage(float damage)
     {
         base.OnDamage(damage);
+
+        if(UIManager.Instance.bossHealthUI != null)
+        {
+            UIManager.Instance.BossUIUpdate(CurHealthPoint, MaxHealthPoint);
+        }
     }
 
     public override void OnDie()
     {
         base.OnDie();
+
+        if (UIManager.Instance.bossHealthUI != null)
+        {
+            UIManager.Instance.BossBattleUI(false);
+        }
+
+        DungeonManager.Instance.bossRoom.OpenEndDoor();
 
         ObjectManager.Instance.Despawn(this);
     }

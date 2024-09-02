@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class SpiderController : EnemyController
 {
     void Start()
     {
-        healthPoint = 10f;
+        CurHealthPoint = 10f;
     }
 
     public override void Move(Vector2 _dir)

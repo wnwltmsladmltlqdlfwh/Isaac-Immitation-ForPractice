@@ -10,6 +10,7 @@ public class DungeonManager : Singleton<DungeonManager>
 {
     public Room[,] dungeonSize;
     public Room currentRoom;
+    public Room bossRoom;
     private List<Room> dungeonList = new List<Room>();
 
     public int maxXValue;
@@ -54,7 +55,6 @@ public class DungeonManager : Singleton<DungeonManager>
         {
             for (int j = 0; j < maxYValue; j++)
             {
-                //var roomPrefab = Instantiate(RoomPrefab, roomsParent);
                 var roomPrefab = PoolingManager.Instance.Pop(RoomPrefab);
                 roomPrefab.name = $"room({i}, {j})";
                 dungeonSize[i, j] = roomPrefab;
@@ -123,8 +123,6 @@ public class DungeonManager : Singleton<DungeonManager>
             yield return null;
         }
 
-        //StartCoroutine(SetDisconnectRooms());
-
         List<Room> forRoomSetList = new List<Room>();
 
         foreach (var dungeon in dungeonList)
@@ -178,6 +176,7 @@ public class DungeonManager : Singleton<DungeonManager>
                     && dungeon.roomType != RoomType.start && dungeon.roomType != RoomType.shop && dungeon.roomType != RoomType.needkey)
                 {
                     dungeon.roomType = RoomType.boss;
+                    bossRoom = dungeon;
                     Debug.Log($"{dungeon.name}을 보스룸으로 설정");
                     break;
                 }

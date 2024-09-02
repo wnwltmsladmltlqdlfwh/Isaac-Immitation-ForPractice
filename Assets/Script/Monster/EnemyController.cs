@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -11,14 +9,14 @@ public class EnemyController : MonoBehaviour
 
     public bool isDead = false;
 
-    public float healthPoint;
+    public float CurHealthPoint;
 
     private void Awake()
     {
-        Init();
+
     }
 
-    protected virtual void Init()
+    public virtual void Init()
     {
         objectType = ObjectType.Enemy;
     }
@@ -30,9 +28,9 @@ public class EnemyController : MonoBehaviour
 
     public virtual void OnDamage(float damage)
     {
-        healthPoint -= damage; //PlayerManager.Instance.AttackPower;
+        CurHealthPoint -= damage; //PlayerManager.Instance.AttackPower;
 
-        if (healthPoint <= 0)
+        if (CurHealthPoint <= 0)
         {
             OnDie();
         }

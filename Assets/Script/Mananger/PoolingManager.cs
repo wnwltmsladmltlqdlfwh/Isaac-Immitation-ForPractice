@@ -6,6 +6,8 @@ using UnityEngine.Pool;
 
 public class PoolingManager : Singleton<PoolingManager>
 {
+    public EnemyBullet enemyBullet;
+
     private class Pool <T> where T : Component
     {
         private T prefab;

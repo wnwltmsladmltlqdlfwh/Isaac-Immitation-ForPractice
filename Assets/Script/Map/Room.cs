@@ -28,6 +28,7 @@ public class Room : MonoBehaviour
     public Door topDoor;
     public Door bottomDoor;
 
+    public EndDoor endDoor;
 
     public bool isUsed = false;
     public bool aroundRoomsFull = false;
@@ -48,6 +49,7 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
+        endDoor.gameObject.SetActive(false);
     }
 
     public void InitRoomArrayPos(int posX, int posY)
@@ -187,6 +189,11 @@ public class Room : MonoBehaviour
         return value;
     }
 
+    public void OpenEndDoor()
+    {
+        endDoor.gameObject.SetActive(true);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -200,7 +207,10 @@ public class Room : MonoBehaviour
                     if (!isSpawned)
                     {
                         _= StartCoroutine(GameManager.Instance.BossSpawn());
+                        GameManager.Instance.CurRoomMonsterCount += 1;
                         isSpawned = !isSpawned;
+
+                        DungeonManager.Instance.onRoomChange?.Invoke();
                     }
                     break;
                 case RoomType.spawnMonster:

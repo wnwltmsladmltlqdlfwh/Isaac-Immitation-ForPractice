@@ -25,6 +25,9 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private Image[,] minimapSize;
 
+    public Slider bossHealthUI;
+    private float bossHealth;
+
     private void Awake()
     {
         minimapSize = new Image[DungeonManager.Instance.maxXValue, DungeonManager.Instance.maxYValue];
@@ -33,6 +36,8 @@ public class UIManager : Singleton<UIManager>
         PlayerManager.Instance.OnCurrencyChanged += ChangedCurrencyUI;
 
         DungeonManager.Instance.onRoomChange += UpdateMiniMapState;
+
+
 
         InitMiniMap();
     }
@@ -145,5 +150,15 @@ public class UIManager : Singleton<UIManager>
                 }
             }
         }
+    }
+
+    public void BossBattleUI(bool isOn)
+    {
+        bossHealthUI.gameObject.SetActive(isOn);
+    }
+
+    public void BossUIUpdate(float curHealth, float maxHealth)
+    {
+        bossHealthUI.value = curHealth / maxHealth;
     }
 }

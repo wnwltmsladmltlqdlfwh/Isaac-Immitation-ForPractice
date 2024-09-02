@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Monstro_Stamp : EnemyBaseState<MonstroCharacter>
 {
-    float moveTime = 0f;
     float startTime = 0f;
+    float moveTime = 1f;
 
     public Monstro_Stamp(MonstroCharacter t_Enemy) : base(t_Enemy)
     {
@@ -17,28 +17,23 @@ public class Monstro_Stamp : EnemyBaseState<MonstroCharacter>
     {
         _enemyChar.animator.SetTrigger(animationHash);
 
+        startTime = 0f;
+
         moveTime = 1f;
     }
 
     protected override void StateUpdate()
     {
-        RiseUp();
-    }
-
-    void RiseUp()
-    {
         if (startTime < moveTime)
         {
             startTime += Time.deltaTime;
+            return;
         }
-        else
-        {
-            _enemyChar.stateMachine.ChangeState(StateType.Pattern_Three);
-        }
+
+        _enemyChar.stateMachine.ChangeState(StateType.Pattern_Three);
     }
 
     protected override void StateExit()
     {
-        throw new System.NotImplementedException();
     }
 }

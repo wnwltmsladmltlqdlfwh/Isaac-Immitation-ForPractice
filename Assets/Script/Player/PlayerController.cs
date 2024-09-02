@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public GameObject headObj;
     public GameObject GetItemObj;
     public GameObject DeadPlayerObj;
+    public GameObject EndPlayerObj;
     public SpriteRenderer itemShowPos;
 
     private PlayerStateMachine stateMachine;
@@ -117,8 +118,6 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator GetItemMotions(Sprite _sprite)
     {
-        Debug.Log("아이템 획득 애니메이션 실행");
-
         headObj.SetActive(false);
         bodyObj.SetActive(false);
         GetItemObj.SetActive(true);
@@ -130,8 +129,6 @@ public class PlayerController : MonoBehaviour
         bodyObj.SetActive(true);
         GetItemObj.SetActive(false);
         itemShowPos.sprite = null;
-
-        Debug.Log("아이템 획득 애니메이션 종료");
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -148,6 +145,21 @@ public class PlayerController : MonoBehaviour
 
         damagedDelay = 3f;
         PlayerManager.Instance.CurHP--;
+        _ = StartCoroutine(DamagedEffect());
+    }
+    private IEnumerator DamagedEffect()
+    {
+        while (damagedDelay > 0)
+        {
+            headObj.GetComponent<SpriteRenderer>().color = Color.white;
+            bodyObj.GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            headObj.GetComponent<SpriteRenderer>().color = Color.gray;
+            bodyObj.GetComponent<SpriteRenderer>().color = Color.gray;
+            yield return new WaitForSeconds(0.1f);
+            headObj.GetComponent<SpriteRenderer>().color = Color.white;
+            bodyObj.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     public void PlayerDeadMotion()
@@ -155,5 +167,14 @@ public class PlayerController : MonoBehaviour
         headObj.SetActive(false);
         bodyObj.SetActive(false);
         DeadPlayerObj.SetActive(true);
+    }
+
+    public IEnumerator PlayerEndMotion()
+    {
+        headObj.SetActive(false);
+        bodyObj.SetActive(false);
+        EndPlayerObj.SetActive(true);
+
+        yield return null;
     }
 }
