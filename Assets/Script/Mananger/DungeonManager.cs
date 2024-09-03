@@ -31,6 +31,7 @@ public class DungeonManager : Singleton<DungeonManager>
 
     public GameObject testHomingItem;
     public GameObject testSkinItem;
+    public GameObject tesThirdBullet;
 
     private void Awake()
     {
@@ -151,6 +152,8 @@ public class DungeonManager : Singleton<DungeonManager>
             var randomRoom = forRoomSetList[rand.Next(forRoomSetList.Count)];
 
             randomRoom.roomType = RoomType.golden;
+
+            tesThirdBullet.transform.position = randomRoom.transform.position;
         }
 
         for (int i = 0; i < maxXValue; i++)

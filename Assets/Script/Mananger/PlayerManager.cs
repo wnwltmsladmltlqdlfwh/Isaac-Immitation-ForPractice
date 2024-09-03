@@ -201,6 +201,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private void InitBulletOptionsDic()
     {
         bulletOptions.Add("Homing", false); //유도기능
+        bulletOptions.Add("ThirdBullet", false); //3갈래 발사
     }
 
     public void SetCurrentBullet(string bulletName)

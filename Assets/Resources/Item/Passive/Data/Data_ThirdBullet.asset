@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34b433717ed1930429ae5ff30e554c2b, type: 3}
-  m_Name: Data_TheSadOnion
+  m_Name: Data_ThirdBullet
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurHP: 2
+  MaxHP: 4
+  CurHP: 0
   Shiled: 0
   AttackSpeed: 3
   AttackPower: 0
@@ -21,9 +21,9 @@ MonoBehaviour:
   BulletSpeed: 0
   MoveSpeed: 0
   Deceleration: 0
-  BoomItem: 1
-  MoneyItem: 1
-  KeyItem: 1
+  BoomItem: 0
+  MoneyItem: 0
+  KeyItem: 0
   ItemIconSprite: {fileID: 0}
   UsedAnimation: 0
   AcquisitionMessage: 

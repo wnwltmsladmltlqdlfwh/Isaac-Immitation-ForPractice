@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class UIManager : Singleton<UIManager>
+public class InGameUIManager : Singleton<InGameUIManager>
 {
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;

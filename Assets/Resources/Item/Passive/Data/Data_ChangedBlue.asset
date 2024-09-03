@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b433717ed1930429ae5ff30e554c2b, type: 3}
   m_Name: Data_ChangedBlue
   m_EditorClassIdentifier: 
-  MaxHP: -4
+  MaxHP: 0
   CurHP: 0
   Shiled: 0
-  AttackSpeed: 5
-  AttackPower: 5
+  AttackSpeed: 3
+  AttackPower: 3
   AttackRange: 0
   BulletSpeed: 5
   MoveSpeed: 0

@@ -125,8 +125,8 @@ public class GameManager : Singleton<GameManager>
 
         var spawnBoss = ObjectManager.Instance.Spawn(isBoss, DungeonManager.Instance.currentRoom.transform.position);
         spawnBoss.isDead = false;
-        UIManager.Instance.BossBattleUI(true);
-        UIManager.Instance.bossHealthUI.value = 1f;
+        InGameUIManager.Instance.BossBattleUI(true);
+        InGameUIManager.Instance.bossHealthUI.value = 1f;
     }
 
     public bool CamMoveCenter()

@@ -29,9 +29,9 @@ public class MonstroController : EnemyController
     {
         base.OnDamage(damage);
 
-        if(UIManager.Instance.bossHealthUI != null)
+        if(InGameUIManager.Instance.bossHealthUI != null)
         {
-            UIManager.Instance.BossUIUpdate(CurHealthPoint, MaxHealthPoint);
+            InGameUIManager.Instance.BossUIUpdate(CurHealthPoint, MaxHealthPoint);
         }
     }
 
@@ -39,9 +39,9 @@ public class MonstroController : EnemyController
     {
         base.OnDie();
 
-        if (UIManager.Instance.bossHealthUI != null)
+        if (InGameUIManager.Instance.bossHealthUI != null)
         {
-            UIManager.Instance.BossBattleUI(false);
+            InGameUIManager.Instance.BossBattleUI(false);
         }
 
         DungeonManager.Instance.bossRoom.OpenEndDoor();

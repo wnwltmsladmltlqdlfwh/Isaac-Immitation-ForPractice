@@ -21,8 +21,8 @@ public class ItemDataSO : ScriptableObject
     [field: SerializeField][field: Range(0, 99)] public int MoneyItem;
     [field: SerializeField][field: Range(0, 99)] public int KeyItem;
 
-    [field: SerializeField] public Sprite ItemIconSprite;
+    //[field: SerializeField] public Sprite ItemIconSprite;
 
-    [field: SerializeField] public bool UsedAnimation;
-    [field: SerializeField] public string AcquisitionMessage;
+    //[field: SerializeField] public bool UsedAnimation;
+    //[field: SerializeField] public string AcquisitionMessage;
 }

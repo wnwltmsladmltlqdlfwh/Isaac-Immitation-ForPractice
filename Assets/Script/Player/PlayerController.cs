@@ -114,6 +114,22 @@ public class PlayerController : MonoBehaviour
 
         bulletGo.GetComponent<BulletBase>()
             .Init(InputManager.Instance.bulletDir, headObj.transform.position);
+
+
+        if (PlayerManager.Instance.bulletOptions["ThirdBullet"])
+        {
+            var sideBullet_L = PoolingManager.Instance.Pop(PlayerManager.Instance.currentBullet);
+            var sideBullet_R = PoolingManager.Instance.Pop(PlayerManager.Instance.currentBullet);
+
+            Vector2 leftDir = Quaternion.Euler(0, 0, 45) * InputManager.Instance.bulletDir;
+            // 오른쪽 45도 회전 벡터 계산
+            Vector2 rightDir = Quaternion.Euler(0, 0, -45) * InputManager.Instance.bulletDir;
+
+            sideBullet_L.GetComponent<BulletBase>()
+                .Init(leftDir, headObj.transform.position);
+            sideBullet_R.GetComponent<BulletBase>()
+                .Init(rightDir, headObj.transform.position);
+        }
     }
 
     public IEnumerator GetItemMotions(Sprite _sprite)

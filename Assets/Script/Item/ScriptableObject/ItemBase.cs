@@ -16,14 +16,14 @@ public class ItemBase : ScriptableObject
     public Sprite itemIcon;
 
     // æ∆¿Ã≈€ »πµÊ ∏ﬁºº¡ˆ
-    public string AcquisitionMessage;
+    // public string AcquisitionMessage;
 
     public bool UsedAnimation = false;
 
     private void SetVisibleOption()
     {
-        itemIcon = ItemData.ItemIconSprite;
-        UsedAnimation = ItemData.UsedAnimation;
+        //itemIcon = ItemData.ItemIconSprite;
+        //UsedAnimation = ItemData.UsedAnimation;
     }
 
     public void ItemGain()
