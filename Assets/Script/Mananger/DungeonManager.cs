@@ -1,38 +1,41 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class DungeonManager : Singleton<DungeonManager>
 {
     public Room[,] dungeonSize;
-    List<Room> dungeonList = new List<Room>();
+    public Room currentRoom;
+    public Room bossRoom;
+    private List<Room> dungeonList = new List<Room>();
 
-    [SerializeField] private int maxXValue;
-    [SerializeField] private int maxYValue;
+    public int maxXValue;
+    public int maxYValue;
     [SerializeField] private Room RoomPrefab;
     [SerializeField] private int disconnectedRoomCount;
 
     public int makeDungeonRoomsCount;
+    public int goldRoomsCount;
+    public int SpawnMonsterRoomsCount;
 
     public Action onRoomChange;
 
-    Transform roomsParent;
+    //Transform roomsParent;
 
     System.Random rand = new System.Random();
+
+
+    public GameObject testHomingItem;
+    public GameObject testSkinItem;
+    public GameObject tesThirdBullet;
 
     private void Awake()
     {
         dungeonSize = new Room[maxXValue, maxYValue];
-
-        if (roomsParent == null)
-        {
-            var parent = Instantiate(new GameObject());
-            parent.name = "RoomParent";
-            parent.transform.position = Vector3.zero;
-            roomsParent = parent.transform;
-        }
     }
 
     private void OnEnable()
@@ -53,7 +56,7 @@ public class DungeonManager : Singleton<DungeonManager>
         {
             for (int j = 0; j < maxYValue; j++)
             {
-                var roomPrefab = Instantiate(RoomPrefab, roomsParent);
+                var roomPrefab = PoolingManager.Instance.Pop(RoomPrefab);
                 roomPrefab.name = $"room({i}, {j})";
                 dungeonSize[i, j] = roomPrefab;
                 roomPrefab.InitRoomArrayPos(i, j);
@@ -61,9 +64,23 @@ public class DungeonManager : Singleton<DungeonManager>
                 if (i == (maxXValue / 2) & j == (maxYValue / 2))
                 {
                     dungeonSize[i, j].IsStartRoom();
+                    currentRoom = dungeonSize[i, j];
                     dungeonList.Add(dungeonSize[i, j]);
                 }
             }
+        }
+
+        Debug.Log("아이템 스포너 끌어오기");
+        if (testHomingItem != null)
+        {
+            testHomingItem.transform.position =
+                new Vector2(currentRoom.transform.position.x + 3, currentRoom.transform.position.y + 3);
+        }
+
+        if (testSkinItem != null)
+        {
+            testSkinItem.transform.position =
+                new Vector2(currentRoom.transform.position.x - 3, currentRoom.transform.position.y + 3);
         }
     }
 
@@ -103,17 +120,126 @@ public class DungeonManager : Singleton<DungeonManager>
             dungeonList.Add(addRoom);
             addRoom.IsUsedRoom();
 
-            Debug.Log($"사용하는 방의 이름 : {addRoom.name}");
-
-            onRoomChange?.Invoke();
             makeDungeonRoomsCount--;
-            Debug.Log(makeDungeonRoomsCount.ToString());
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
 
-        Debug.Log("방 생성 완료");
+        List<Room> forRoomSetList = new List<Room>();
 
-        StartCoroutine(SetDisconnectRooms());
+        foreach (var dungeon in dungeonList)
+        {
+            if (dungeon == currentRoom || CheckOverSpecialRooms()) { continue; }
+
+            if (dungeon.CountedRoomAround() == 1)
+            {
+                dungeon.roomType = RoomType.boss;
+            }
+            else if(dungeon.roomType != RoomType.boss || dungeon.roomType != RoomType.start)
+            {
+                forRoomSetList.Add(dungeon);
+            }
+        }
+
+        while(CountRoomType(RoomType.spawnMonster) < SpawnMonsterRoomsCount)
+        {
+            var randomRoom = forRoomSetList[rand.Next(forRoomSetList.Count)];
+
+            randomRoom.roomType = RoomType.spawnMonster;
+        }
+
+        while(CountRoomType(RoomType.golden) < goldRoomsCount)
+        {
+            var randomRoom = forRoomSetList[rand.Next(forRoomSetList.Count)];
+
+            randomRoom.roomType = RoomType.golden;
+
+            tesThirdBullet.transform.position = randomRoom.transform.position;
+        }
+
+        for (int i = 0; i < maxXValue; i++)
+        {
+            for (int j = 0; j < maxYValue; j++)
+            {
+                if (!dungeonSize[i, j].isUsed)
+                {
+                    dungeonSize[i, j].gameObject.SetActive(false);
+                }
+            }
+        }
+
+        GameManager.Instance.SetPlayerOnStartRoom();
+
+        onRoomChange?.Invoke();
+
+        if (CheckNullBossRoom())
+        {
+            foreach (var dungeon in forRoomSetList)
+            {
+                if (dungeon.CountedRoomAround() == 1 && dungeon.roomType != RoomType.golden
+                    && dungeon.roomType != RoomType.start && dungeon.roomType != RoomType.shop && dungeon.roomType != RoomType.needkey)
+                {
+                    dungeon.roomType = RoomType.boss;
+                    bossRoom = dungeon;
+                    Debug.Log($"{dungeon.name}을 보스룸으로 설정");
+                    break;
+                }
+            }
+            //dungeonList[UnityEngine.Random.Range(0, dungeonList.Count)].roomType = RoomType.boss;
+            onRoomChange?.Invoke();
+        }
+
+    }
+
+    private bool CheckOverSpecialRooms()
+    {
+        int countedGold = 0;
+        foreach (var dungeon in dungeonList)
+        {
+            if (dungeon.roomType == RoomType.boss)
+            {
+                Debug.Log("보스방 초과");
+                return true;
+            }
+            if(dungeon.roomType == RoomType.golden)
+            {
+                countedGold++;
+                if(countedGold > 2)
+                {
+                    Debug.Log("황금방 초과");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private bool CheckNullBossRoom()
+    {
+        foreach (var dungeon in dungeonList)
+        {
+            if(dungeon.roomType == RoomType.boss)
+            {
+                Debug.Log("보스룸 생성 완료");
+                
+                return false;
+            }
+        }
+        Debug.Log("보스룸 미생성");
+        return true;
+    }
+
+    private int CountRoomType(RoomType type)
+    {
+        int count = 0;
+
+        foreach (var dungeon in dungeonList)
+        {
+            if(dungeon.roomType == type)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     public IEnumerator SetDisconnectRooms()
@@ -128,8 +254,8 @@ public class DungeonManager : Singleton<DungeonManager>
         {
             var findDisconnectRoom = dungeonList[rand.Next(0, dungeonList.Count)];
 
-            if (findDisconnectRoom.leftRoom == null && findDisconnectRoom.rightRoom == null
-                && findDisconnectRoom.topRoom == null && findDisconnectRoom.bottomRoom == null) { continue; }
+            // 현재 지우고자 하는 방이 문을 가지고 있는가 체크
+            if (CheckConnectLeast(findDisconnectRoom)) { continue; }
 
             Debug.Log($"선택 방 이름 :{findDisconnectRoom.name} ");
 
@@ -141,8 +267,14 @@ public class DungeonManager : Singleton<DungeonManager>
                 {
                     var leftRoom = findDisconnectRoom.leftRoom;
 
+                    if (CheckConnectLeast(leftRoom)) { continue; }
+
                     leftRoom.rightDoor.gameObject.SetActive(false);
                     findDisconnectRoom.leftDoor.gameObject.SetActive(false);
+
+                    findDisconnectRoom.leftRoom = null;
+
+                    Debug.Log($"{findDisconnectRoom.name}의 왼쪽 방 연결해제");
                 }
             }
             else if (randF > 0.25f) // 오른쪽
@@ -151,8 +283,14 @@ public class DungeonManager : Singleton<DungeonManager>
                 {
                     var rightRoom = findDisconnectRoom.rightRoom;
 
+                    if (CheckConnectLeast(rightRoom)) { continue; }
+
                     rightRoom.leftDoor.gameObject.SetActive(false);
                     findDisconnectRoom.rightDoor.gameObject.SetActive(false);
+
+                    findDisconnectRoom.rightRoom = null;
+
+                    Debug.Log($"{findDisconnectRoom.name}의 오른쪽 방 연결해제");
                 }
             }
             else if (randF > 0.5f) // 위
@@ -161,8 +299,14 @@ public class DungeonManager : Singleton<DungeonManager>
                 {
                     var topRoom = findDisconnectRoom.topRoom;
 
+                    if (CheckConnectLeast(topRoom)) { continue; }
+
                     topRoom.bottomDoor.gameObject.SetActive(false);
                     findDisconnectRoom.topDoor.gameObject.SetActive(false);
+
+                    findDisconnectRoom.topRoom = null;
+
+                    Debug.Log($"{findDisconnectRoom.name}의 윗쪽 방 연결해제");
                 }
             }
             else if (randF > 0.75f) // 아래
@@ -171,8 +315,14 @@ public class DungeonManager : Singleton<DungeonManager>
                 {
                     var bottomRoom = findDisconnectRoom.bottomRoom;
 
+                    if (CheckConnectLeast(bottomRoom)) { continue; }
+
                     bottomRoom.topDoor.gameObject.SetActive(false);
                     findDisconnectRoom.bottomDoor.gameObject.SetActive(false);
+
+                    findDisconnectRoom.bottomRoom = null;
+
+                    Debug.Log($"{findDisconnectRoom.name}의 아래쪽 방 연결해제");
                 }
             }
 
@@ -181,6 +331,20 @@ public class DungeonManager : Singleton<DungeonManager>
             value--;
 
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    //TODO : 방이 이동할 수 있는지 체크 필요 (아예 갈수 없게 문이 막힘)
+
+    private bool CheckConnectLeast(Room targetRoom)
+    {
+        if(targetRoom.CountedRoomAround() <= 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

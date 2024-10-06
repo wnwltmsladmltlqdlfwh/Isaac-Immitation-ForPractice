@@ -6,11 +6,11 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    [field : Header("Animations")]
-    [field : SerializeField] public PlayerAnimation AnimationData { get; private set; }
+    [field: Header("Animations")]
+    [field: SerializeField] public PlayerAnimation AnimationData { get; private set; }
 
-    [field : Header("References")]
-    [field : SerializeField] public PlayerSO Data { get; private set; }
+    [field: Header("References")]
+    [field: SerializeField] public PlayerSO Data { get; private set; }
 
     public Rigidbody2D rb2D { get; private set; }
 
@@ -20,18 +20,21 @@ public class PlayerController : MonoBehaviour
     public GameObject bodyObj;
     public GameObject headObj;
     public GameObject GetItemObj;
+    public GameObject DeadPlayerObj;
+    public GameObject EndPlayerObj;
     public SpriteRenderer itemShowPos;
 
     private PlayerStateMachine stateMachine;
     private float passedTime = 0f;
-    
+
+    private float damagedDelay = 0f;
+
+    [SerializeField] private ObjectType objectType;
 
     private void Awake()
     {
         stateMachine = new PlayerStateMachine(this);
         rb2D = GetComponent<Rigidbody2D>();
-
-        PlayerManager.Instance.InitPlayerData(this.Data);
 
         AnimationData.Initialize();
     }
@@ -39,10 +42,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         stateMachine.ChangedState(stateMachine.idleBodyState);
+
+        PlayerManager.Instance.InitPlayerData(this.Data);
+        ObjectManager.Instance.GetPlayerInfo(this);
     }
 
     void Update()
     {
+        if (damagedDelay > 0f)
+        {
+            damagedDelay -= Time.deltaTime;
+        }
+
         stateMachine.Update();
     }
 
@@ -72,13 +83,12 @@ public class PlayerController : MonoBehaviour
 
     public void HeadDirection(bool isShooting)
     {
-        passedTime += Time.deltaTime;
-
         if (isShooting)
         {
             float savedSpeed = HeadAnimator.speed;
 
-            if(passedTime > PlayerManager.Instance.AttackSpeed)
+            passedTime += Time.deltaTime;
+            if ((1.0f / (PlayerManager.Instance.AttackSpeed)) <= passedTime)
             {
                 passedTime = 0f;
 
@@ -104,12 +114,26 @@ public class PlayerController : MonoBehaviour
 
         bulletGo.GetComponent<BulletBase>()
             .Init(InputManager.Instance.bulletDir, headObj.transform.position);
+
+
+        if (PlayerManager.Instance.bulletOptions["ThirdBullet"])
+        {
+            var sideBullet_L = PoolingManager.Instance.Pop(PlayerManager.Instance.currentBullet);
+            var sideBullet_R = PoolingManager.Instance.Pop(PlayerManager.Instance.currentBullet);
+
+            Vector2 leftDir = Quaternion.Euler(0, 0, 45) * InputManager.Instance.bulletDir;
+            // 오른쪽 45도 회전 벡터 계산
+            Vector2 rightDir = Quaternion.Euler(0, 0, -45) * InputManager.Instance.bulletDir;
+
+            sideBullet_L.GetComponent<BulletBase>()
+                .Init(leftDir, headObj.transform.position);
+            sideBullet_R.GetComponent<BulletBase>()
+                .Init(rightDir, headObj.transform.position);
+        }
     }
 
-    private IEnumerator GetItemMotions(Sprite _sprite)
+    public IEnumerator GetItemMotions(Sprite _sprite)
     {
-        Debug.Log("아이템 획득 애니메이션 실행");
-
         headObj.SetActive(false);
         bodyObj.SetActive(false);
         GetItemObj.SetActive(true);
@@ -121,30 +145,52 @@ public class PlayerController : MonoBehaviour
         bodyObj.SetActive(true);
         GetItemObj.SetActive(false);
         itemShowPos.sprite = null;
-
-        Debug.Log("아이템 획득 애니메이션 종료");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        GameObject getItem = collision.gameObject;
-
-        if (getItem.layer.ToString() != "Item")
+        if (collision.gameObject.GetComponent<EnemyController>() != null)
         {
-            getItem.GetComponent<ItemBase>().AddStat();
-
-            if (getItem.CompareTag("UseAnimItem"))
-            {
-                _ = StartCoroutine("GetItemMotions",
-                    collision.gameObject.GetComponent<ItemBase>().ItemData.ItemIconSprite);
-            }
-
-            if(getItem.GetComponent<RareItem>() != null)
-            {
-                getItem.GetComponent<RareItem>().ItemGet();
-            }
-
-            Destroy(getItem);
+            OnDamaged();
         }
+    }
+
+    public void OnDamaged()
+    {
+        if (damagedDelay > 0f) { return; }
+
+        damagedDelay = 3f;
+        PlayerManager.Instance.CurHP--;
+        _ = StartCoroutine(DamagedEffect());
+    }
+    private IEnumerator DamagedEffect()
+    {
+        while (damagedDelay > 0)
+        {
+            headObj.GetComponent<SpriteRenderer>().color = Color.white;
+            bodyObj.GetComponent<SpriteRenderer>().color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            headObj.GetComponent<SpriteRenderer>().color = Color.gray;
+            bodyObj.GetComponent<SpriteRenderer>().color = Color.gray;
+            yield return new WaitForSeconds(0.1f);
+            headObj.GetComponent<SpriteRenderer>().color = Color.white;
+            bodyObj.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+
+    public void PlayerDeadMotion()
+    {
+        headObj.SetActive(false);
+        bodyObj.SetActive(false);
+        DeadPlayerObj.SetActive(true);
+    }
+
+    public IEnumerator PlayerEndMotion()
+    {
+        headObj.SetActive(false);
+        bodyObj.SetActive(false);
+        EndPlayerObj.SetActive(true);
+
+        yield return null;
     }
 }

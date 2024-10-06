@@ -33,6 +33,8 @@ public class InputManager : Singleton<InputManager>
         charInput.BulletDir.started += OnBulletDir;
         charInput.BulletDir.performed += OnBulletDir;
         charInput.BulletDir.canceled += OnBulletDir;
+
+        charInput.FireBomb.started += OnFireBomb;
     }
 
     private void OnEnable()
@@ -47,19 +49,34 @@ public class InputManager : Singleton<InputManager>
 
     public void OnMoveChar(InputAction.CallbackContext callbackContext)
     {
+        if (PlayerManager.Instance.playerIsDead)
+            return;
+
         moveDir = callbackContext.ReadValue<Vector2>();
     }
 
     public void OnBulletDir(InputAction.CallbackContext callbackContext)
     {
+        if (PlayerManager.Instance.playerIsDead)
+            return;
+
         isShooting = charInput.BulletDir.IsPressed();
 
         var inputDir = callbackContext.ReadValue<Vector2>();
+
         if (inputDir == Vector2.zero)
-        {
             return;
-        }
 
         bulletDir = inputDir;
+    }
+
+    public void OnFireBomb(InputAction.CallbackContext callbackContext)
+    {
+        if (PlayerManager.Instance.playerIsDead || PlayerManager.Instance.BombItem <= 0)
+            return;
+
+        Debug.Log("ÆøÅº»ý¼º");
+
+        ObjectManager.Instance.PoolingBombPrefab();
     }
 }
